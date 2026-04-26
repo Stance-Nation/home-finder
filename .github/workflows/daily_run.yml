@@ -32,6 +32,7 @@ jobs:
         run: python run.py
 
       - name: Commit updated database and dashboard
+        if: always()
         run: |
           git config user.name "Home Finder Bot"
           git config user.email "actions@github.com"

@@ -1,0 +1,40 @@
+name: Daily Home Finder Run
+
+on:
+  schedule:
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run agent
+        env:
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
+        run: python run.py
+
+      - name: Commit updated database and dashboard
+        run: |
+          git config user.name "Home Finder Bot"
+          git config user.email "actions@github.com"
+          git add data/seen_listings.db docs/index.html reports/ || true
+          git diff --staged --quiet || git commit -m "chore: daily run $(date +%Y-%m-%d)"
+          git push

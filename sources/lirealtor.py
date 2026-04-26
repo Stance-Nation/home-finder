@@ -1,4 +1,5 @@
 import re
+import hashlib
 import requests
 from bs4 import BeautifulSoup
 from core.models import Listing
@@ -34,7 +35,7 @@ class LIRealtorSource(BaseSource):
                 if not link:
                     continue
                 href = link.get("href", "")
-                lid = f"lirealtor-{hash(href)}"
+                lid = f"lirealtor-{hashlib.md5(href.encode()).hexdigest()[:12]}"
                 if lid in seen or not href:
                     continue
                 seen.add(lid)

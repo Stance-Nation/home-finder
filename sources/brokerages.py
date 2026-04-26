@@ -1,4 +1,5 @@
 import re
+import hashlib
 import requests
 from bs4 import BeautifulSoup
 from core.models import Listing
@@ -172,7 +173,7 @@ class BrokerageSource(BaseSource):
                     if not link_el:
                         continue
                     href = link_el.get("href", "")
-                    lid = f"{self.name}-{hash(href)}"
+                    lid = f"{self.name}-{hashlib.md5(href.encode()).hexdigest()[:12]}"
                     if lid in seen or not href:
                         continue
                     seen.add(lid)

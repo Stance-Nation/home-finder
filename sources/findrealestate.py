@@ -1,4 +1,5 @@
 import re
+import hashlib
 import requests
 from bs4 import BeautifulSoup
 from core.models import Listing
@@ -29,7 +30,7 @@ class FindRealEstateSource(BaseSource):
                 if not link:
                     continue
                 href = link.get("href", "")
-                lid = f"fre-{hash(href)}"
+                lid = f"fre-{hashlib.md5(href.encode()).hexdigest()[:12]}"
                 if lid in seen:
                     continue
                 seen.add(lid)

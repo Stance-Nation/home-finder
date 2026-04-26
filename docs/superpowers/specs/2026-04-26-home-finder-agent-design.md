@@ -115,6 +115,7 @@ Each source is an independent module. If one source is unavailable or blocked, a
 | Bedrooms | 2 or 3 |
 | Price | ≤ $900,000 |
 | Garage | Must be explicitly listed as included |
+| Transit mode | No LIRR permitted — subway and bus only. If no subway/bus route exists within 1hr 10min, listing is excluded |
 
 ### Soft Flags (listing appears but is marked)
 | Flag | Trigger |
@@ -200,8 +201,9 @@ Listings are sorted highest-to-lowest by a composite value score. Priority order
 - **API:** Google Maps Platform — Directions API (transit mode)
 - **Destination:** 200 5th Avenue, New York, NY 10010
 - **Timing:** Estimated for a weekday morning departure (~8:30am) to reflect realistic commute conditions
+- **Transit mode restriction:** Subway and bus only. The API query explicitly excludes LIRR. If the only route within 1hr 10min requires LIRR, the listing fails the hard filter and is excluded entirely.
 - **Free tier:** Covers daily usage for this use case
-- **Soft flag threshold:** > 70 minutes estimated transit time
+- **Soft flag threshold:** > 70 minutes estimated transit time (subway/bus route)
 - **Score impact:** Transit time is the second-highest weighted factor in the value score
 
 ---

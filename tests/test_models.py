@@ -35,3 +35,6 @@ def test_listing_to_dict():
     d = listing.to_dict()
     assert d["listing_id"] == "test-456"
     assert d["garage"] == 1
+    assert d["flip_flag"] == 0
+    assert d["commute_flag"] == 0
+    assert d["condition_keywords"] == ""

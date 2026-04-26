@@ -4,19 +4,21 @@ from typing import Optional
 DESTINATION = "200 5th Avenue, New York, NY 10010"
 LIRR_AGENCY_NAMES = {"long island rail road", "lirr"}
 
-def _call_api(origin: str, api_key: str) -> dict:
+def _call_api(origin: str, api_key: str, config: dict = None) -> dict:
     from datetime import datetime, timedelta
-    import time
-    # Find next Monday at 08:30 (weekday=0 is Monday)
+    config = config or {}
+    destination = config.get("commute_destination", DESTINATION)
+    departure_time_str = config.get("commute_departure_time", "08:30")
+    hour, minute = map(int, departure_time_str.split(":"))
     now = datetime.now()
     days_until_monday = (7 - now.weekday()) % 7 or 7
-    next_monday = now.replace(hour=8, minute=30, second=0, microsecond=0) + timedelta(days=days_until_monday)
+    next_monday = now.replace(hour=hour, minute=minute, second=0, microsecond=0) + timedelta(days=days_until_monday)
     departure_ts = int(next_monday.timestamp())
 
     url = "https://maps.googleapis.com/maps/api/directions/json"
     params = {
         "origin": origin,
-        "destination": DESTINATION,
+        "destination": destination,
         "mode": "transit",
         "transit_mode": "subway|bus",
         "departure_time": departure_ts,
@@ -38,9 +40,9 @@ def _uses_lirr(route: dict) -> bool:
                     return True
     return False
 
-def get_transit_minutes(address: str, api_key: str) -> Optional[int]:
+def get_transit_minutes(address: str, api_key: str, config: dict = None) -> Optional[int]:
     try:
-        data = _call_api(address, api_key)
+        data = _call_api(address, api_key, config or {})
     except Exception:
         return None
     if data.get("status") != "OK":

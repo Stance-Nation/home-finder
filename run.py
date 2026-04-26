@@ -62,7 +62,7 @@ def main():
     from core.transit import get_transit_minutes
     transit_passed = []
     for listing in filtered:
-        minutes = get_transit_minutes(listing.address, api_key)
+        minutes = get_transit_minutes(listing.address, api_key, config)
         if minutes is None:
             print(f"[transit] No subway route: {listing.address} — excluded")
             continue

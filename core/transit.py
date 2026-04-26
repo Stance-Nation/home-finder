@@ -5,13 +5,21 @@ DESTINATION = "200 5th Avenue, New York, NY 10010"
 LIRR_AGENCY_NAMES = {"long island rail road", "lirr"}
 
 def _call_api(origin: str, api_key: str) -> dict:
+    from datetime import datetime, timedelta
+    import time
+    # Find next Monday at 08:30 (weekday=0 is Monday)
+    now = datetime.now()
+    days_until_monday = (7 - now.weekday()) % 7 or 7
+    next_monday = now.replace(hour=8, minute=30, second=0, microsecond=0) + timedelta(days=days_until_monday)
+    departure_ts = int(next_monday.timestamp())
+
     url = "https://maps.googleapis.com/maps/api/directions/json"
     params = {
         "origin": origin,
         "destination": DESTINATION,
         "mode": "transit",
         "transit_mode": "subway|bus",
-        "departure_time": "next_monday_0830",
+        "departure_time": departure_ts,
         "alternatives": "true",
         "key": api_key,
     }
@@ -40,8 +48,10 @@ def get_transit_minutes(address: str, api_key: str) -> Optional[int]:
     for route in data.get("routes", []):
         if _uses_lirr(route):
             continue
-        for leg in route.get("legs", []):
-            seconds = leg.get("duration", {}).get("value")
-            if seconds:
-                return seconds // 60
+        total_seconds = sum(
+            leg.get("duration", {}).get("value", 0)
+            for leg in route.get("legs", [])
+        )
+        if total_seconds > 0:
+            return total_seconds // 60
     return None

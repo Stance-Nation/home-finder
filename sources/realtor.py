@@ -19,6 +19,9 @@ class RealtorSource(BaseSource):
         ("Pelham Bay", "Bronx", "NY"),
         ("Morris Park", "Bronx", "NY"),
         ("Country Club", "Bronx", "NY"),
+        ("Kew Garden Hills", "Queens", "NY"),
+        ("Pelham Gardens", "Bronx", "NY"),
+        ("Pelham Parkway", "Bronx", "NY"),
     ]
 
     def fetch(self, config: dict) -> list:

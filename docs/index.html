@@ -10,33 +10,1519 @@
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
   .card{background:#fff;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);position:relative;}
   .card-photo{width:100%;border-radius:6px;margin-bottom:10px;object-fit:cover;height:180px;}
-  .card-address{font-size:16px;font-weight:bold;margin-bottom:4px;}
+  .card-address{font-size:16px;font-weight:bold;margin-bottom:4px;padding-right:36px;}
   .card-meta{color:#888;font-size:13px;margin-bottom:6px;}
   .card-price{font-size:22px;color:#2c7a2c;font-weight:bold;margin-bottom:6px;}
   .card-details{color:#444;font-size:13px;margin-bottom:4px;}
   .card-score{color:#555;font-size:13px;margin-bottom:6px;}
   .card-flags{margin-bottom:8px;}
+  .card-seen{color:#bbb;font-size:11px;margin-top:6px;}
   .flag{font-size:12px;font-weight:bold;padding:2px 6px;border-radius:4px;margin-right:4px;}
   .flag.flip{background:#ffe0cc;color:#a03000;}
   .flag.commute{background:#fff3cd;color:#856404;}
+  .flag.garage{background:#e8f0fe;color:#1a56db;}
   .card-link{display:inline-block;background:#1a73e8;color:#fff;padding:7px 14px;border-radius:4px;text-decoration:none;font-size:13px;}
   .card-source{color:#aaa;font-size:11px;margin-top:6px;}
-  .badge-new{position:absolute;top:12px;right:12px;background:#2c7a2c;color:#fff;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;}
+  .badge-new{position:absolute;top:12px;left:12px;background:#2c7a2c;color:#fff;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;}
+  .fav-btn{position:absolute;top:10px;right:10px;background:none;border:none;font-size:22px;cursor:pointer;line-height:1;padding:2px;}
+  .fav-btn.active{color:#f5a623;}
   .meta-bar{background:#fff;border-radius:8px;padding:12px 20px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;gap:24px;align-items:center;flex-wrap:wrap;}
   .meta-bar span{color:#555;font-size:14px;}
+  .sync-panel{background:#fff;border-radius:8px;padding:16px 20px;margin-top:32px;border:1px solid #ddd;}
+  .sync-panel h3{margin:0 0 8px;color:#333;font-size:15px;}
+  .sync-panel p{color:#666;font-size:13px;margin:0 0 10px;}
+  .sync-panel textarea{width:100%;font-family:monospace;font-size:12px;border:1px solid #ddd;border-radius:4px;padding:8px;resize:vertical;}
+  .sync-btn{background:#1a73e8;color:#fff;border:none;padding:7px 14px;border-radius:4px;cursor:pointer;font-size:13px;margin-top:8px;}
 </style>
 </head>
 <body>
 <h1>🏠 RC-KB Home Finder &mdash; NYC</h1>
 <div class="meta-bar">
   <span>📅 Last updated: April 27, 2026</span>
-  <span>🏘 0 total matches</span>
-  <span>🆕 0 new today</span>
+  <span>🏘 51 total matches</span>
+  <span>🆕 51 new this week</span>
   <span>📍 Queens &amp; Bronx | ≤$900k | 2–3 bed | Garage required</span>
 </div>
 
+    <section>
+        <h2>New This Week (51)</h2>
+        <div class="grid">
+    <div class="card" id="card-realtor-3233182545" data-id="realtor-3233182545">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3233182545')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/03944be5a230af72f7b47fbfd5f83940l-m1595870049s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">102-18 64th Ave Unit 2X, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$395,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 48 min</div>
+        <div class="card-score">Value score: 56/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3233182545" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3100008527" data-id="realtor-3100008527">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3100008527')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/59fb4ab03789dc91753242de77ae597al-m3881239494s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">110-20 71st Ave Unit 620, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$450,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 46 min</div>
+        <div class="card-score">Value score: 56/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3100008527" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4383092139" data-id="realtor-4383092139">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4383092139')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/e26ce79616eacc3381d4369ef58338f6l-m1967871947s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">67-30 Clyde St Unit 5B, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$425,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 49 min</div>
+        <div class="card-score">Value score: 55/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4383092139" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9260111688" data-id="realtor-9260111688">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9260111688')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/8a2358e92ebc699a926073d82c3c9b2el-m3251370594s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">108-50 62 Dr Unit 4R, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$358,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 55 min</div>
+        <div class="card-score">Value score: 54/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9260111688" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4961214907" data-id="realtor-4961214907">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4961214907')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/7c30a62d36dc88d58d0ce3840ea4c107l-m1718333995s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">78-14 Austin St Unit 5E, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$438,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 51 min</div>
+        <div class="card-score">Value score: 54/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4961214907" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3009336637" data-id="realtor-3009336637">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3009336637')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/222a593a5a66b9ee7589130b291ecd6dl-m3440866235s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">67-38 108th St Unit B33, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$529,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 49 min</div>
+        <div class="card-score">Value score: 53/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3009336637" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9095891958" data-id="realtor-9095891958">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9095891958')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/2c626139dbda4f9181aba883d67c11c3l-m2614229251s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">83-75 118th St Unit 4H, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$300,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 52 min</div>
+        <div class="card-score">Value score: 53/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9095891958" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3664747747" data-id="realtor-3664747747">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3664747747')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/0266b2212eda1ebf04224853c9444da2l-m1329426311s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">68-44 Burns St Unit B2, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$469,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 53 min</div>
+        <div class="card-score">Value score: 52/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3664747747" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4032416930" data-id="realtor-4032416930">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4032416930')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/5603a2a90be9714f7c7d7400ee735816l-m103655681s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">73-20 Austin St Unit 1E, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$598,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 47 min</div>
+        <div class="card-score">Value score: 52/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4032416930" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4110174839" data-id="realtor-4110174839">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4110174839')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/c097811f00d736d08e999f2834212f8el-m3006382955s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">125-10 Queens Blvd Unit 2205, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$359,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 51 min</div>
+        <div class="card-score">Value score: 52/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4110174839" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9112312187" data-id="realtor-9112312187">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9112312187')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/928872b675dbec859f43251604720b2cl-m4258685163s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">61-20 Grand Central Pkwy Unit C306, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$330,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 65 min</div>
+        <div class="card-score">Value score: 50/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9112312187" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4071769765" data-id="realtor-4071769765">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4071769765')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/9a96e5945117e9c7ef0e7ae9def2ade0l-m2175533469s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">83-33 Austin St Unit 2C, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$385,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 53 min</div>
+        <div class="card-score">Value score: 50/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4071769765" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4566445405" data-id="realtor-4566445405">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4566445405')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/e5a840018e641cc53d244793a16ca14al-m1413243310s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8384 116th St Apt 5G, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$399,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 53 min</div>
+        <div class="card-score">Value score: 50/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4566445405" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3342008023" data-id="realtor-3342008023">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3342008023')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/e895885268bf94cdcd48a8d70a8ef86al-m2116128607s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">83-80 118th St Unit 4A, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$419,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 52 min</div>
+        <div class="card-score">Value score: 50/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3342008023" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3931429740" data-id="realtor-3931429740">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3931429740')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/6a3f3323065a0398110e4ec0716c365fl-m774141713s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">110-11 Queens Blvd Unit 24L, Queens, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$699,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 47 min</div>
+        <div class="card-score">Value score: 50/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3931429740" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4875224708" data-id="realtor-4875224708">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4875224708')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/47677adb24824e3b6bbdb68b1d0e2959l-m3012584293s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8470 129th St Apt 6L, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$329,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 58 min</div>
+        <div class="card-score">Value score: 49/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4875224708" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9101033460" data-id="realtor-9101033460">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9101033460')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/e6b7850310659f8a0633efbebd4a57del-m2942735102s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">144-17 Grand Central Pkwy Unit 67GA, Kew Garden Hills, NY</div>
+        <div class="card-meta">Kew Garden Hills · Queens</div>
+        <div class="card-price">$350,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 49 min</div>
+        <div class="card-score">Value score: 49/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9101033460" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9771992629" data-id="realtor-9771992629">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9771992629')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/d49016e32c3e514d4b53e9ec3bee3359l-m4222506968s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">118-11 84th Ave Unit 412, Queens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$289,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 62 min</div>
+        <div class="card-score">Value score: 49/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9771992629" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3940799725" data-id="realtor-3940799725">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3940799725')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/603deb3e9c46c2b859a5c6a7d923de92l-m2990297343s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">131-11 Kew Gardens Rd Unit 6N, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$259,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 46 min</div>
+        <div class="card-score">Value score: 48/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3940799725" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4026402040" data-id="realtor-4026402040">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4026402040')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/38337395a2487cc40001e3244238de52l-m3291648851s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8300 Talbot St Apt 2B, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$520,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 52 min</div>
+        <div class="card-score">Value score: 48/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4026402040" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9570097466" data-id="realtor-9570097466">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9570097466')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/c4a426377f30e1cf3066cb70a0d54931l-m2152451530s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">118-60 Metropolitan Ave Unit 2I, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$419,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 58 min</div>
+        <div class="card-score">Value score: 47/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9570097466" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4567080180" data-id="realtor-4567080180">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4567080180')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/db499218dd5de8168a6aa1d0eca560c2l-m34605510s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8385 116th St Apt 4L, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$525,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 54 min</div>
+        <div class="card-score">Value score: 47/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4567080180" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4313508860" data-id="realtor-4313508860">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4313508860')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/09dd4d951721aaf6ce2bdccdca7385d1l-m1124821643s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">11525 Metropolitan Ave Apt 233, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$469,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 57 min</div>
+        <div class="card-score">Value score: 47/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4313508860" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4655057520" data-id="realtor-4655057520">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4655057520')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/7e762b399a92dfbedc21d565c3fa6482l-m4054412168s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">83-44 Lefferts Blvd Unit 1F, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$388,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 62 min</div>
+        <div class="card-score">Value score: 46/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4655057520" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3842957336" data-id="realtor-3842957336">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3842957336')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/a598934013b8ffdf9a5cbe3787d58255l-m591924113s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">14764 Village Rd Apt 90B, Kew Garden Hills, NY</div>
+        <div class="card-meta">Kew Garden Hills · Queens</div>
+        <div class="card-price">$375,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 54 min</div>
+        <div class="card-score">Value score: 46/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3842957336" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3940346085" data-id="realtor-3940346085">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3940346085')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/29b4d1d78c3e551acd61ce3ac90f4499l-m2714873555s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">110-11 Queens Blvd Unit 8K, Queens, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$889,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 47 min</div>
+        <div class="card-score">Value score: 46/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3940346085" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9407438091" data-id="realtor-9407438091">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9407438091')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/82403162905f97a9a43cc9cb43ba9bc2l-m3678632970s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">76-36 113th St Unit 2B, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$775,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 53 min</div>
+        <div class="card-score">Value score: 46/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9407438091" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3706343082" data-id="realtor-3706343082">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3706343082')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/0b10987cace33d999ad672955a35ce56l-m2299127962s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8375 117th St Apt 6F, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$589,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 54 min</div>
+        <div class="card-score">Value score: 45/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3706343082" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4594401864" data-id="realtor-4594401864">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4594401864')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/b0f71e89af4b7f6fc96d415fff5b44b7l-m1065131156s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">118-11 84th Ave Unit 301, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$447,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 62 min</div>
+        <div class="card-score">Value score: 45/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4594401864" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9604691500" data-id="realtor-9604691500">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9604691500')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/5871e2aeaf5f582dd3ce979d0f90d917l-m1876762010s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">116-17 Grosvenor Ln Unit 3A, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$599,888</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 59 min</div>
+        <div class="card-score">Value score: 43/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9604691500" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3608821410" data-id="realtor-3608821410">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3608821410')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/a4a62a326d17905923adb298fa50bb80l-m247963547s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8515 120th St Apt 3F, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$630,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 61 min</div>
+        <div class="card-score">Value score: 41/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3608821410" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3661568982" data-id="realtor-3661568982">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3661568982')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/f78d6ad356f06fecb241b931e012493al-m2794603487s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">85-15 120th St Unit 3A, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$649,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 61 min</div>
+        <div class="card-score">Value score: 41/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3661568982" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3297702977" data-id="realtor-3297702977">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3297702977')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/e10d4450ab30d19d50faa916f0a2734dl-m3366412512s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">84-92 Austin St, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$788,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 58 min</div>
+        <div class="card-score">Value score: 39/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3297702977" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3700945145" data-id="realtor-3700945145">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3700945145')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/43fc4468a5368857b894b786217e8205l-m367633790s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">132-06 Metropolitan Ave, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$749,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 53 min</div>
+        <div class="card-score">Value score: 34/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3700945145" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4575109325" data-id="realtor-4575109325">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4575109325')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/a566f270545513f6a2c9c718d39da968l-m1971664448s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">85 Amity Pl, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$650,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 62 min</div>
+        <div class="card-score">Value score: 32/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4575109325" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3394763790" data-id="realtor-3394763790">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3394763790')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/64fec5309e8184d8eb330c613fb2d297l-m1435605742s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">9119 110th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$579,900</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 68 min</div>
+        <div class="card-score">Value score: 31/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3394763790" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3185409319" data-id="realtor-3185409319">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3185409319')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/3d01bae2b840311377e7d150d25b60f0l-m4253769331s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">10710 111th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$699,999</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 63 min</div>
+        <div class="card-score">Value score: 31/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3185409319" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3034630613" data-id="realtor-3034630613">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3034630613')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/15af2970bb64cd2c7ae25205f5232be3l-m307174216s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">7750 Amboy Rd, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$699,900</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 67 min</div>
+        <div class="card-score">Value score: 29/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3034630613" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3204036696" data-id="realtor-3204036696">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3204036696')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/0c08e60f1eefd5e230b1fc3802d52a72l-m3459425143s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">91-16 110th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$699,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 68 min</div>
+        <div class="card-score">Value score: 29/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3204036696" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4131453909" data-id="realtor-4131453909">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4131453909')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/c2214f81df37fceeaac1792c2f145037l-m3142934121s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">10461 Atlantic Ave, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$740,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 66 min</div>
+        <div class="card-score">Value score: 29/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4131453909" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3624823420" data-id="realtor-3624823420">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3624823420')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/dadbc83c07007b41ed276574217b0ad7l-m1826762692s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">87-49 110th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$749,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 66 min</div>
+        <div class="card-score">Value score: 29/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3624823420" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4871853654" data-id="realtor-4871853654">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4871853654')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/8e403e00e71ba3180db3e0c701bae7b1l-m1984627588s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">104-63 123rd St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$779,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 66 min</div>
+        <div class="card-score">Value score: 28/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4871853654" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4345778568" data-id="realtor-4345778568">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4345778568')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/814e3547d0b6d245d93d830fbf2b4825l-m426489269s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">104-53 128th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$705,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 72 min</div>
+        <div class="card-score">Value score: 28/100</div>
+        <div class="card-flags"><span class="flag commute">⚠ Long Commute</span> <span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4345778568" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4551068420" data-id="realtor-4551068420">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4551068420')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/77674210ebda9c089a902470e1d5f49bl-m247410099s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">103-17 113th St, Richmond Hill South, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$699,999</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 61 min</div>
+        <div class="card-score">Value score: 28/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4551068420" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4889015583" data-id="realtor-4889015583">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4889015583')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/bdb1c6813f3f8d07dc50e2f45fe397abl-m2178194013s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">91-26 110th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$769,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 67 min</div>
+        <div class="card-score">Value score: 28/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4889015583" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3628372611" data-id="realtor-3628372611">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3628372611')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/9f9ed9690f9b8df50349f8bf1b152bf8l-m597734344s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">104-48 Lefferts Blvd, Richmond Hill, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$749,999</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 61 min</div>
+        <div class="card-score">Value score: 27/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3628372611" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3784478941" data-id="realtor-3784478941">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3784478941')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/8525a07560050f800e42be1447f4c01fl-m3611250817s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">10124 134th St, Richmond Hill South, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$725,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 63 min</div>
+        <div class="card-score">Value score: 26/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3784478941" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3412714602" data-id="realtor-3412714602">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3412714602')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/a6c98eb4eac51b1422f019aa08964db8l-m1756987913s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">107-08 110th St, Ozone Park, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$799,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 63 min</div>
+        <div class="card-score">Value score: 25/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3412714602" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4404104842" data-id="realtor-4404104842">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4404104842')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/869d4fb4f0459a8c77ec9174827f8906l-m1782622413s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">10125 131st St, Richmond Hill South, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$799,990</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 64 min</div>
+        <div class="card-score">Value score: 24/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4404104842" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4830844150" data-id="realtor-4830844150">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4830844150')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/1665e0d51865aada4c8f61c439786392l-m3982886767s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">9726 133rd St, Richmond Hill South, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$868,900</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 62 min</div>
+        <div class="card-score">Value score: 24/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4830844150" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4161982939" data-id="realtor-4161982939">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4161982939')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/790cf719be077f706c3b8c113736ea99l-m2336847187s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">10713 115th St, Richmond Hill South, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$835,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 64 min</div>
+        <div class="card-score">Value score: 24/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4161982939" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div></div>
+    </section>
 <section>
-  <h2>All Active Matches (0)</h2>
-  <div class="grid"><p>No listings found.</p></div>
+  <h2>All Active Matches (51)</h2>
+  <div class="grid">
+    <div class="card" id="card-realtor-3233182545" data-id="realtor-3233182545">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3233182545')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/03944be5a230af72f7b47fbfd5f83940l-m1595870049s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">102-18 64th Ave Unit 2X, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$395,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 48 min</div>
+        <div class="card-score">Value score: 56/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3233182545" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3100008527" data-id="realtor-3100008527">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3100008527')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/59fb4ab03789dc91753242de77ae597al-m3881239494s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">110-20 71st Ave Unit 620, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$450,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 46 min</div>
+        <div class="card-score">Value score: 56/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3100008527" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4383092139" data-id="realtor-4383092139">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4383092139')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/e26ce79616eacc3381d4369ef58338f6l-m1967871947s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">67-30 Clyde St Unit 5B, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$425,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 49 min</div>
+        <div class="card-score">Value score: 55/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4383092139" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9260111688" data-id="realtor-9260111688">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9260111688')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/8a2358e92ebc699a926073d82c3c9b2el-m3251370594s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">108-50 62 Dr Unit 4R, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$358,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 55 min</div>
+        <div class="card-score">Value score: 54/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9260111688" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4961214907" data-id="realtor-4961214907">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4961214907')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/7c30a62d36dc88d58d0ce3840ea4c107l-m1718333995s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">78-14 Austin St Unit 5E, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$438,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 51 min</div>
+        <div class="card-score">Value score: 54/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4961214907" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3009336637" data-id="realtor-3009336637">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3009336637')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/222a593a5a66b9ee7589130b291ecd6dl-m3440866235s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">67-38 108th St Unit B33, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$529,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 49 min</div>
+        <div class="card-score">Value score: 53/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3009336637" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9095891958" data-id="realtor-9095891958">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9095891958')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/2c626139dbda4f9181aba883d67c11c3l-m2614229251s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">83-75 118th St Unit 4H, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$300,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 52 min</div>
+        <div class="card-score">Value score: 53/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9095891958" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3664747747" data-id="realtor-3664747747">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3664747747')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/0266b2212eda1ebf04224853c9444da2l-m1329426311s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">68-44 Burns St Unit B2, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$469,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 53 min</div>
+        <div class="card-score">Value score: 52/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3664747747" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4032416930" data-id="realtor-4032416930">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4032416930')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/5603a2a90be9714f7c7d7400ee735816l-m103655681s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">73-20 Austin St Unit 1E, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$598,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 47 min</div>
+        <div class="card-score">Value score: 52/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4032416930" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4110174839" data-id="realtor-4110174839">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4110174839')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/c097811f00d736d08e999f2834212f8el-m3006382955s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">125-10 Queens Blvd Unit 2205, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$359,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 51 min</div>
+        <div class="card-score">Value score: 52/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4110174839" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9112312187" data-id="realtor-9112312187">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9112312187')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/928872b675dbec859f43251604720b2cl-m4258685163s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">61-20 Grand Central Pkwy Unit C306, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$330,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 65 min</div>
+        <div class="card-score">Value score: 50/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9112312187" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4071769765" data-id="realtor-4071769765">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4071769765')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/9a96e5945117e9c7ef0e7ae9def2ade0l-m2175533469s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">83-33 Austin St Unit 2C, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$385,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 53 min</div>
+        <div class="card-score">Value score: 50/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4071769765" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4566445405" data-id="realtor-4566445405">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4566445405')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/e5a840018e641cc53d244793a16ca14al-m1413243310s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8384 116th St Apt 5G, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$399,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 53 min</div>
+        <div class="card-score">Value score: 50/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4566445405" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3342008023" data-id="realtor-3342008023">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3342008023')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/e895885268bf94cdcd48a8d70a8ef86al-m2116128607s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">83-80 118th St Unit 4A, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$419,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 52 min</div>
+        <div class="card-score">Value score: 50/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3342008023" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3931429740" data-id="realtor-3931429740">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3931429740')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/6a3f3323065a0398110e4ec0716c365fl-m774141713s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">110-11 Queens Blvd Unit 24L, Queens, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$699,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 47 min</div>
+        <div class="card-score">Value score: 50/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3931429740" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4875224708" data-id="realtor-4875224708">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4875224708')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/47677adb24824e3b6bbdb68b1d0e2959l-m3012584293s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8470 129th St Apt 6L, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$329,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 58 min</div>
+        <div class="card-score">Value score: 49/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4875224708" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9101033460" data-id="realtor-9101033460">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9101033460')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/e6b7850310659f8a0633efbebd4a57del-m2942735102s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">144-17 Grand Central Pkwy Unit 67GA, Kew Garden Hills, NY</div>
+        <div class="card-meta">Kew Garden Hills · Queens</div>
+        <div class="card-price">$350,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 49 min</div>
+        <div class="card-score">Value score: 49/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9101033460" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9771992629" data-id="realtor-9771992629">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9771992629')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/d49016e32c3e514d4b53e9ec3bee3359l-m4222506968s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">118-11 84th Ave Unit 412, Queens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$289,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 62 min</div>
+        <div class="card-score">Value score: 49/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9771992629" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3940799725" data-id="realtor-3940799725">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3940799725')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/603deb3e9c46c2b859a5c6a7d923de92l-m2990297343s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">131-11 Kew Gardens Rd Unit 6N, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$259,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 46 min</div>
+        <div class="card-score">Value score: 48/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3940799725" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4026402040" data-id="realtor-4026402040">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4026402040')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/38337395a2487cc40001e3244238de52l-m3291648851s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8300 Talbot St Apt 2B, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$520,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 52 min</div>
+        <div class="card-score">Value score: 48/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4026402040" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9570097466" data-id="realtor-9570097466">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9570097466')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/c4a426377f30e1cf3066cb70a0d54931l-m2152451530s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">118-60 Metropolitan Ave Unit 2I, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$419,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 58 min</div>
+        <div class="card-score">Value score: 47/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9570097466" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4567080180" data-id="realtor-4567080180">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4567080180')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/db499218dd5de8168a6aa1d0eca560c2l-m34605510s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8385 116th St Apt 4L, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$525,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 54 min</div>
+        <div class="card-score">Value score: 47/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4567080180" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4313508860" data-id="realtor-4313508860">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4313508860')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/09dd4d951721aaf6ce2bdccdca7385d1l-m1124821643s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">11525 Metropolitan Ave Apt 233, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$469,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 57 min</div>
+        <div class="card-score">Value score: 47/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4313508860" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4655057520" data-id="realtor-4655057520">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4655057520')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/7e762b399a92dfbedc21d565c3fa6482l-m4054412168s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">83-44 Lefferts Blvd Unit 1F, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$388,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 62 min</div>
+        <div class="card-score">Value score: 46/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4655057520" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3842957336" data-id="realtor-3842957336">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3842957336')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/a598934013b8ffdf9a5cbe3787d58255l-m591924113s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">14764 Village Rd Apt 90B, Kew Garden Hills, NY</div>
+        <div class="card-meta">Kew Garden Hills · Queens</div>
+        <div class="card-price">$375,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 54 min</div>
+        <div class="card-score">Value score: 46/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3842957336" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3940346085" data-id="realtor-3940346085">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3940346085')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/29b4d1d78c3e551acd61ce3ac90f4499l-m2714873555s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">110-11 Queens Blvd Unit 8K, Queens, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$889,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 47 min</div>
+        <div class="card-score">Value score: 46/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3940346085" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9407438091" data-id="realtor-9407438091">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9407438091')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/82403162905f97a9a43cc9cb43ba9bc2l-m3678632970s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">76-36 113th St Unit 2B, Forest Hills, NY</div>
+        <div class="card-meta">Forest Hills · Queens</div>
+        <div class="card-price">$775,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 53 min</div>
+        <div class="card-score">Value score: 46/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9407438091" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3706343082" data-id="realtor-3706343082">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3706343082')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/0b10987cace33d999ad672955a35ce56l-m2299127962s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8375 117th St Apt 6F, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$589,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 54 min</div>
+        <div class="card-score">Value score: 45/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3706343082" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4594401864" data-id="realtor-4594401864">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4594401864')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/b0f71e89af4b7f6fc96d415fff5b44b7l-m1065131156s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">118-11 84th Ave Unit 301, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$447,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 62 min</div>
+        <div class="card-score">Value score: 45/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4594401864" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-9604691500" data-id="realtor-9604691500">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-9604691500')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/5871e2aeaf5f582dd3ce979d0f90d917l-m1876762010s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">116-17 Grosvenor Ln Unit 3A, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$599,888</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 59 min</div>
+        <div class="card-score">Value score: 43/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/9604691500" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3608821410" data-id="realtor-3608821410">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3608821410')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/a4a62a326d17905923adb298fa50bb80l-m247963547s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">8515 120th St Apt 3F, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$630,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 61 min</div>
+        <div class="card-score">Value score: 41/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3608821410" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3661568982" data-id="realtor-3661568982">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3661568982')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/f78d6ad356f06fecb241b931e012493al-m2794603487s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">85-15 120th St Unit 3A, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$649,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 61 min</div>
+        <div class="card-score">Value score: 41/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3661568982" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3297702977" data-id="realtor-3297702977">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3297702977')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/e10d4450ab30d19d50faa916f0a2734dl-m3366412512s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">84-92 Austin St, Kew Gardens, NY</div>
+        <div class="card-meta">Kew Gardens · Queens</div>
+        <div class="card-price">$788,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 58 min</div>
+        <div class="card-score">Value score: 39/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3297702977" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3700945145" data-id="realtor-3700945145">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3700945145')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/43fc4468a5368857b894b786217e8205l-m367633790s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">132-06 Metropolitan Ave, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$749,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 53 min</div>
+        <div class="card-score">Value score: 34/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3700945145" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4575109325" data-id="realtor-4575109325">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4575109325')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/a566f270545513f6a2c9c718d39da968l-m1971664448s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">85 Amity Pl, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$650,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 62 min</div>
+        <div class="card-score">Value score: 32/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4575109325" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3394763790" data-id="realtor-3394763790">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3394763790')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/64fec5309e8184d8eb330c613fb2d297l-m1435605742s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">9119 110th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$579,900</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 68 min</div>
+        <div class="card-score">Value score: 31/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3394763790" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3185409319" data-id="realtor-3185409319">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3185409319')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/3d01bae2b840311377e7d150d25b60f0l-m4253769331s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">10710 111th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$699,999</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 63 min</div>
+        <div class="card-score">Value score: 31/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3185409319" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3034630613" data-id="realtor-3034630613">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3034630613')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/15af2970bb64cd2c7ae25205f5232be3l-m307174216s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">7750 Amboy Rd, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$699,900</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 67 min</div>
+        <div class="card-score">Value score: 29/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3034630613" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3204036696" data-id="realtor-3204036696">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3204036696')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/0c08e60f1eefd5e230b1fc3802d52a72l-m3459425143s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">91-16 110th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$699,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 68 min</div>
+        <div class="card-score">Value score: 29/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3204036696" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4131453909" data-id="realtor-4131453909">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4131453909')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/c2214f81df37fceeaac1792c2f145037l-m3142934121s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">10461 Atlantic Ave, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$740,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 66 min</div>
+        <div class="card-score">Value score: 29/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4131453909" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3624823420" data-id="realtor-3624823420">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3624823420')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/dadbc83c07007b41ed276574217b0ad7l-m1826762692s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">87-49 110th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$749,000</div>
+        <div class="card-details">🛏 2 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 66 min</div>
+        <div class="card-score">Value score: 29/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3624823420" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4871853654" data-id="realtor-4871853654">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4871853654')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/8e403e00e71ba3180db3e0c701bae7b1l-m1984627588s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">104-63 123rd St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$779,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 66 min</div>
+        <div class="card-score">Value score: 28/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4871853654" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4345778568" data-id="realtor-4345778568">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4345778568')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/814e3547d0b6d245d93d830fbf2b4825l-m426489269s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">104-53 128th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$705,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 72 min</div>
+        <div class="card-score">Value score: 28/100</div>
+        <div class="card-flags"><span class="flag commute">⚠ Long Commute</span> <span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4345778568" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4551068420" data-id="realtor-4551068420">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4551068420')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/77674210ebda9c089a902470e1d5f49bl-m247410099s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">103-17 113th St, Richmond Hill South, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$699,999</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 61 min</div>
+        <div class="card-score">Value score: 28/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4551068420" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4889015583" data-id="realtor-4889015583">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4889015583')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/bdb1c6813f3f8d07dc50e2f45fe397abl-m2178194013s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">91-26 110th St, Richmond Hill, NY</div>
+        <div class="card-meta">Richmond Hill · Queens</div>
+        <div class="card-price">$769,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 67 min</div>
+        <div class="card-score">Value score: 28/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4889015583" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3628372611" data-id="realtor-3628372611">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3628372611')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/9f9ed9690f9b8df50349f8bf1b152bf8l-m597734344s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">104-48 Lefferts Blvd, Richmond Hill, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$749,999</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 61 min</div>
+        <div class="card-score">Value score: 27/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3628372611" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3784478941" data-id="realtor-3784478941">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3784478941')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/8525a07560050f800e42be1447f4c01fl-m3611250817s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">10124 134th St, Richmond Hill South, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$725,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 63 min</div>
+        <div class="card-score">Value score: 26/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3784478941" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-3412714602" data-id="realtor-3412714602">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-3412714602')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/a6c98eb4eac51b1422f019aa08964db8l-m1756987913s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">107-08 110th St, Ozone Park, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$799,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 63 min</div>
+        <div class="card-score">Value score: 25/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/3412714602" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4404104842" data-id="realtor-4404104842">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4404104842')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/869d4fb4f0459a8c77ec9174827f8906l-m1782622413s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">10125 131st St, Richmond Hill South, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$799,990</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 64 min</div>
+        <div class="card-score">Value score: 24/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4404104842" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4830844150" data-id="realtor-4830844150">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4830844150')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/1665e0d51865aada4c8f61c439786392l-m3982886767s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">9726 133rd St, Richmond Hill South, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$868,900</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 62 min</div>
+        <div class="card-score">Value score: 24/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4830844150" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div>
+    <div class="card" id="card-realtor-4161982939" data-id="realtor-4161982939">
+        <span class="badge-new">NEW</span>
+        <button class="fav-btn" onclick="toggleFav('realtor-4161982939')" title="Favourite this listing">☆</button>
+        <img class="card-photo" src="https://ap.rdcpix.com/790cf719be077f706c3b8c113736ea99l-m2336847187s.jpg" onerror="this.style.display='none'" />
+        <div class="card-address">10713 115th St, Richmond Hill South, NY</div>
+        <div class="card-meta">South Richmond Hill · Queens</div>
+        <div class="card-price">$835,000</div>
+        <div class="card-details">🛏 3 bed &nbsp;|&nbsp; 🚗 Garage ✓ &nbsp;|&nbsp; 🚇 64 min</div>
+        <div class="card-score">Value score: 24/100</div>
+        <div class="card-flags"><span class="flag garage">⚠ Garage unconfirmed</span></div>
+        <a class="card-link" href="https://www.realtor.com/realestateandhomes-detail/4161982939" target="_blank">View Listing</a>
+        <div class="card-source">via realtor</div>
+        <div class="card-seen">First seen: 2026-04-27</div>
+    </div></div>
 </section>
+<div class="sync-panel" id="sync-panel" style="display:none">
+  <h3>⭐ Save Your Favourites</h3>
+  <p>You've starred some listings. To make sure they never expire, copy the JSON below and paste it into <strong>favourites.json</strong> in your GitHub repo (click the pencil icon to edit it).</p>
+  <textarea id="fav-json" rows="4" readonly></textarea>
+  <button class="sync-btn" onclick="copyFavJson()">Copy to clipboard</button>
+</div>
+<script>
+  const FAV_KEY = 'hf_favourites';
+  function getFavs() { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); }
+  function saveFavs(favs) { localStorage.setItem(FAV_KEY, JSON.stringify(favs)); }
+
+  function toggleFav(id) {
+    let favs = getFavs();
+    const idx = favs.indexOf(id);
+    if (idx === -1) { favs.push(id); } else { favs.splice(idx, 1); }
+    saveFavs(favs);
+    renderFavs();
+  }
+
+  function renderFavs() {
+    const favs = getFavs();
+    document.querySelectorAll('.fav-btn').forEach(btn => {
+      const id = btn.closest('.card').dataset.id;
+      btn.textContent = favs.includes(id) ? '⭐' : '☆';
+      btn.classList.toggle('active', favs.includes(id));
+    });
+    const panel = document.getElementById('sync-panel');
+    if (favs.length > 0) {
+      panel.style.display = 'block';
+      document.getElementById('fav-json').value = JSON.stringify({"favourites": favs}, null, 2);
+    } else {
+      panel.style.display = 'none';
+    }
+  }
+
+  function copyFavJson() {
+    const ta = document.getElementById('fav-json');
+    ta.select();
+    document.execCommand('copy');
+    event.target.textContent = 'Copied!';
+    setTimeout(() => event.target.textContent = 'Copy to clipboard', 2000);
+  }
+
+  document.addEventListener('DOMContentLoaded', renderFavs);
+</script>
 </body></html>

@@ -15,6 +15,8 @@
     "Pelham Gardens", "Pelham Bay", "Pelham Parkway",
     "Morris Park", "Country Club"
   ],
+  "allowed_property_types": ["single_family", "multi_family", "townhouse", "land"],
+  "excluded_property_types": ["condo", "apartment", "co_op", "mobile"],
   "sender_email": "RC-KBHomes@gmail.com",
   "run_time_utc": "13:00"
 }

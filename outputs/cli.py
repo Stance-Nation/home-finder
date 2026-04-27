@@ -13,13 +13,26 @@ def format_listing(listing: Listing) -> str:
         flags.append("⚠ Likely Flip")
     if listing.commute_flag:
         flags.append("⚠ Long Commute")
-    if not listing.garage_confirmed:
+    if listing.property_type == "land":
+        pass  # No garage warning for vacant lots
+    elif not listing.garage_confirmed:
         flags.append("⚠ Garage unconfirmed — verify before viewing")
     flag_str = "  " + " | ".join(flags) if flags else ""
     transit = f"{listing.transit_minutes}min" if listing.transit_minutes else "N/A"
     score = f"{_stars(listing.value_score)} ({listing.value_score:.2f})" if listing.value_score is not None else "Unscored"
+    type_labels = {
+        "single_family": "Detached",
+        "multi_family": "Multi-Family",
+        "townhouse": "Townhouse",
+        "land": "Vacant Lot",
+    }
+    type_str = ""
+    if listing.property_type:
+        label = type_labels.get(listing.property_type, listing.property_type.replace("_", " ").title())
+        type_str = f"  Type: {label}\n"
     return (
         f"\n[{score}] {listing.address}\n"
+        f"{type_str}"
         f"  {listing.bedrooms} bed · ${listing.price:,} · Garage ✓ · Transit: {transit}\n"
         f"  Source: {listing.source}{flag_str}\n"
         f"  {listing.listing_url}"

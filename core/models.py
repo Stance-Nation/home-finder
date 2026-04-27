@@ -24,6 +24,8 @@ class Listing:
     condition_keywords: list = field(default_factory=list)
     value_score: Optional[float] = None
     date_first_seen: str = field(default_factory=lambda: date.today().isoformat())
+    property_type: str = ""          # e.g. "single_family", "multi_family", "townhouse", "land", "condo"
+    hoa_fee: Optional[float] = None  # monthly HOA or maintenance fee in dollars; None = unknown
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -32,4 +34,6 @@ class Listing:
         d["flip_flag"] = 1 if self.flip_flag else 0
         d["commute_flag"] = 1 if self.commute_flag else 0
         d["condition_keywords"] = ",".join(self.condition_keywords)
+        d["property_type"] = self.property_type
+        d["hoa_fee"] = self.hoa_fee
         return d

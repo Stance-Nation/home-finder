@@ -49,14 +49,42 @@ class ZillowSource(BaseSource):
                 if not zpid or zpid in seen_zpids:
                     continue
                 seen_zpids.add(zpid)
-                garage = any(
-                    "garage" in (prop.get(f) or "").lower()
-                    for f in ["parkingType", "description", "garageSpaces"]
-                )
-                # garageSpaces > 0 also counts as confirmed garage
+                # Extract property type
+                raw_type = prop.get("homeType", "").lower()
+                type_map = {
+                    "single_family": "single_family",
+                    "multi_family": "multi_family",
+                    "townhouse": "townhouse",
+                    "land": "land",
+                    "condo": "condo",
+                    "apartment": "apartment",
+                    "co_op": "co_op",
+                    "manufactured": "mobile",
+                }
+                prop_type = type_map.get(raw_type, raw_type)
+                # Extract HOA fee
+                hoa_fee = None
+                raw_hoa = prop.get("monthlyHoaFee") or prop.get("hoaFee")
+                if raw_hoa:
+                    try:
+                        hoa_fee = float(raw_hoa)
+                    except (ValueError, TypeError):
+                        pass
+                # Land exemption — don't require garage for vacant lots
+                is_land = prop_type == "land"
                 garage_spaces = prop.get("garageSpaces", 0) or 0
-                if garage_spaces:
-                    garage = True
+                if is_land:
+                    garage = False
+                    garage_confirmed = False
+                else:
+                    garage = any(
+                        "garage" in (prop.get(f) or "").lower()
+                        for f in ["parkingType", "description", "garageSpaces"]
+                    )
+                    # garageSpaces > 0 also counts as confirmed garage
+                    if garage_spaces:
+                        garage = True
+                    garage_confirmed = bool(garage_spaces)
                 try:
                     price = int(prop.get("price", 0) or 0)
                     bedrooms = int(prop.get("bedrooms", 0) or 0)
@@ -71,11 +99,13 @@ class ZillowSource(BaseSource):
                     price=price,
                     bedrooms=bedrooms,
                     garage=garage,
-                    garage_confirmed=bool(garage_spaces),
+                    garage_confirmed=garage_confirmed,
                     source="zillow",
                     listing_url=f"https://www.zillow.com/homedetails/{zpid}_zpid/",
                     photo_url=prop.get("imgSrc"),
                     days_on_market=prop.get("daysOnZillow"),
+                    property_type=prop_type,
+                    hoa_fee=hoa_fee,
                 ))
 
         return listings
@@ -86,7 +116,7 @@ class ZillowSource(BaseSource):
         params = {
             "location": location,
             "status_type": "ForSale",
-            "home_type": "Houses",
+            "home_type": "Houses,Multi-family,Townhomes,Land",
             "maxPrice": config["max_price"],
             "bedsMin": config["min_bedrooms"],
             "bedsMax": config["max_bedrooms"],
@@ -111,7 +141,7 @@ class ZillowSource(BaseSource):
         fallback_params = {
             "location": location,
             "status_type": "ForSale",
-            "home_type": "Houses",
+            "home_type": "Houses,Multi-family,Townhomes,Land",
             "price_max": config["max_price"],
             "beds_min": config["min_bedrooms"],
             "beds_max": config["max_bedrooms"],

@@ -14,9 +14,22 @@ def _card_html(listing: Listing) -> str:
         flags.append('<span class="flag flip">⚠ Likely Flip</span>')
     if listing.commute_flag:
         flags.append('<span class="flag commute">⚠ Long Commute</span>')
-    if not listing.garage_confirmed:
+    if listing.property_type == "land":
+        flags.append('<span class="flag garage">No garage (vacant lot)</span>')
+    elif not listing.garage_confirmed:
         flags.append('<span class="flag garage">⚠ Garage unconfirmed</span>')
     flag_html = " ".join(flags)
+    # Property type badge
+    type_labels = {
+        "single_family": "Detached",
+        "multi_family": "Multi-Family",
+        "townhouse": "Townhouse",
+        "land": "Vacant Lot",
+    }
+    badges = ""
+    if listing.property_type:
+        label = type_labels.get(listing.property_type, listing.property_type.replace("_", " ").title())
+        badges += f'<span class="badge badge-type">{label}</span>'
     new_badge = '<span class="badge-new">NEW</span>' if _is_new(listing) else ""
     transit = f"{listing.transit_minutes} min" if listing.transit_minutes else "N/A"
     score_pct = int((listing.value_score or 0) * 100)
@@ -25,6 +38,7 @@ def _card_html(listing: Listing) -> str:
     return f"""
     <div class="card" id="card-{lid}" data-id="{lid}">
         {new_badge}
+        {badges}
         <button class="fav-btn" onclick="toggleFav('{lid}')" title="Favourite this listing">☆</button>
         {photo_html}
         <div class="card-address">{listing.address}</div>
@@ -77,6 +91,8 @@ def build_dashboard(all_listings: list, new_listing_ids: set) -> str:
   .card-link{{display:inline-block;background:#1a73e8;color:#fff;padding:7px 14px;border-radius:4px;text-decoration:none;font-size:13px;}}
   .card-source{{color:#aaa;font-size:11px;margin-top:6px;}}
   .badge-new{{position:absolute;top:12px;left:12px;background:#2c7a2c;color:#fff;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;}}
+  .badge{{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;margin-right:4px;margin-bottom:4px;}}
+  .badge-type{{background:#6b7280;color:#fff;}}
   .fav-btn{{position:absolute;top:10px;right:10px;background:none;border:none;font-size:22px;cursor:pointer;line-height:1;padding:2px;}}
   .fav-btn.active{{color:#f5a623;}}
   .meta-bar{{background:#fff;border-radius:8px;padding:12px 20px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;gap:24px;align-items:center;flex-wrap:wrap;}}

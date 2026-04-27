@@ -37,7 +37,7 @@ class RealtorSource(BaseSource):
                 "filters": {
                     "list_price": {"max": config["max_price"]},
                     "beds": {"min": config["min_bedrooms"], "max": config["max_bedrooms"]},
-                    "prop_type": ["single_family"],
+                    "prop_type": ["single_family", "multi_family", "townhomes", "land"],
                 },
                 "city": neighborhood,
                 "state_code": state,
@@ -55,8 +55,22 @@ class RealtorSource(BaseSource):
                 prop_str = str(prop).lower()
                 garage_spaces = int(desc.get("garage") or 0)
                 garage_confirmed = garage_spaces > 0 or "garage" in prop_str
-                # Include listing unless explicitly no garage — unknown = assume possible
-                garage = True
+                # Extract property type
+                prop_type = (desc.get("type") or "").lower().replace(" ", "_")
+                # Normalize "townhomes" -> "townhouse" to match our canonical names
+                if prop_type == "townhomes":
+                    prop_type = "townhouse"
+                # Land exemption — don't require garage for vacant lots
+                is_land = prop_type == "land"
+                garage = True if not is_land else False
+                garage_confirmed = garage_confirmed if not is_land else False
+                # Extract HOA fee
+                hoa_fee = None
+                hoa = prop.get("hoa") or {}
+                if hoa:
+                    monthly = hoa.get("fee") or hoa.get("monthly_fee") or 0
+                    if monthly:
+                        hoa_fee = float(monthly)
                 location = prop.get("location", {}).get("address", {})
                 price = (prop.get("list_price") or 0)
                 listings.append(Listing(
@@ -72,5 +86,7 @@ class RealtorSource(BaseSource):
                     listing_url=f"https://www.realtor.com/realestateandhomes-detail/{prop_id}",
                     photo_url=(prop.get("primary_photo") or {}).get("href"),
                     days_on_market=prop.get("list_date_delta"),
+                    property_type=prop_type,
+                    hoa_fee=hoa_fee,
                 ))
         return listings

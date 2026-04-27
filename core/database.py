@@ -36,6 +36,8 @@ class Database:
         for col, definition in [
             ("is_favourite", "INTEGER DEFAULT 0"),
             ("garage_confirmed", "INTEGER DEFAULT 0"),
+            ("property_type", "TEXT DEFAULT ''"),
+            ("hoa_fee", "REAL"),
         ]:
             try:
                 self.conn.execute(f"ALTER TABLE seen_listings ADD COLUMN {col} {definition}")
@@ -57,11 +59,13 @@ class Database:
             INSERT OR IGNORE INTO seen_listings
             (listing_id, address, neighborhood, borough, price, bedrooms,
              garage, garage_confirmed, source, listing_url, photo_url, transit_minutes,
-             flip_flag, commute_flag, value_score, date_first_seen, is_favourite)
+             flip_flag, commute_flag, value_score, date_first_seen, is_favourite,
+             property_type, hoa_fee)
             VALUES
             (:listing_id, :address, :neighborhood, :borough, :price, :bedrooms,
              :garage, :garage_confirmed, :source, :listing_url, :photo_url, :transit_minutes,
-             :flip_flag, :commute_flag, :value_score, :date_first_seen, :is_favourite)
+             :flip_flag, :commute_flag, :value_score, :date_first_seen, :is_favourite,
+             :property_type, :hoa_fee)
         """, d)
         self.conn.commit()
 
@@ -104,6 +108,8 @@ class Database:
                 commute_flag=bool(row["commute_flag"]),
                 value_score=row["value_score"],
                 date_first_seen=row["date_first_seen"],
+                property_type=row["property_type"] or "",
+                hoa_fee=row["hoa_fee"],
             )
             results.append(listing)
         return results

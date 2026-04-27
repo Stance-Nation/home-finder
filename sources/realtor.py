@@ -52,7 +52,8 @@ class RealtorSource(BaseSource):
                     continue
                 seen_ids.add(prop_id)
                 desc = (prop.get("description") or {})
-                garage = bool(desc.get("garage")) or "garage" in str(desc).lower()
+                garage_spaces = desc.get("garage") or 0
+                garage = int(garage_spaces) > 0 or "garage" in str(desc).lower() or bool(desc.get("garage_parking"))
                 location = prop.get("location", {}).get("address", {})
                 price = (prop.get("list_price") or 0)
                 listings.append(Listing(

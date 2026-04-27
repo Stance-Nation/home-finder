@@ -5,7 +5,7 @@ from sources.base import BaseSource
 
 class ZillowSource(BaseSource):
     name = "zillow"
-    _BASE_URL = "https://zillow-com1.p.rapidapi.com/propertyExtendedSearch"
+    _BASE_URL = "https://zillow-com1.p.rapidapi.com/propertyByZipCode"
     _HEADERS = {
         "X-RapidAPI-Key": "",
         "X-RapidAPI-Host": "zillow-com1.p.rapidapi.com",
@@ -33,12 +33,8 @@ class ZillowSource(BaseSource):
         for neighborhood, zipcodes in self._NEIGHBORHOOD_ZIPCODES.items():
             for zipcode in zipcodes:
                 params = {
-                    "location": zipcode,
+                    "zipcode": zipcode,
                     "home_type": "Houses",
-                    "minBeds": config["min_bedrooms"],
-                    "maxBeds": config["max_bedrooms"],
-                    "maxPrice": config["max_price"],
-                    "status_type": "ForSale",
                 }
                 resp = requests.get(self._BASE_URL, headers=headers, params=params, timeout=15)
                 resp.raise_for_status()

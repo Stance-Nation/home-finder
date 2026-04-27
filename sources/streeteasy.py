@@ -1,32 +1,18 @@
 import json
 import logging
 import re
-import requests
 from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 from core.models import Listing
 from sources.base import BaseSource
 
 logger = logging.getLogger(__name__)
 
-# StreetEasy does partial server-side rendering but has changed its CSS selectors
-# multiple times. We use a multi-strategy approach:
-#   1. Try JSON-LD structured data embedded in <script type="application/ld+json">
-#   2. Try embedded JavaScript state (window.__INITIAL_STATE__ or similar patterns)
-#   3. Fall back to CSS-based card parsing with updated selectors
-
-_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Referer": "https://streeteasy.com/",
-    "DNT": "1",
-    "Upgrade-Insecure-Requests": "1",
-}
+_USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/124.0.0.0 Safari/537.36"
+)
 
 _SEARCHES = [
     ("Forest Hills",       "Queens", "forest-hills-queens"),
@@ -41,12 +27,13 @@ _SEARCHES = [
     ("Country Club",       "Bronx",  "country-club-bronx"),
 ]
 
-# CSS selectors to try (in priority order) — StreetEasy updates these periodically
+# CSS selectors to try for listing cards (in priority order)
 _CARD_SELECTORS = [
     "article.listingCard",
-    "article.ListingCard",
     "[data-testid='listing-card']",
     "[class*='listingCard']",
+    ".SC-listing-card",
+    "article.ListingCard",
     ".listing-item",
 ]
 
@@ -54,6 +41,35 @@ _CARD_SELECTORS = [
 def _parse_int(text: str) -> int:
     m = re.search(r"\d[\d,]*", text or "")
     return int(m.group().replace(",", "")) if m else 0
+
+
+def _parse_html(html: str, neighborhood: str, borough: str) -> list[Listing]:
+    """
+    Parse StreetEasy search results HTML and return a list of Listing objects.
+
+    This function is pure (no browser/network calls) and is the primary target
+    for unit tests. It tries three strategies in order:
+      1. JSON-LD structured data (<script type="application/ld+json">)
+      2. Embedded JS state (window.__INITIAL_STATE__ or similar)
+      3. CSS-based card parsing with multiple selector patterns
+    """
+    soup = BeautifulSoup(html, "lxml")
+    listings: list[Listing] = []
+
+    # Strategy 1: JSON-LD
+    listings = _listings_from_json_ld(_extract_json_ld(soup), neighborhood, borough)
+    if listings:
+        return listings
+
+    # Strategy 2: embedded JS state
+    state = _extract_embedded_json_state(soup)
+    if state:
+        listings = _listings_from_embedded_state(state, neighborhood, borough)
+    if listings:
+        return listings
+
+    # Strategy 3: HTML card parsing
+    return _listings_from_html_cards(soup, neighborhood, borough)
 
 
 def _extract_json_ld(soup: BeautifulSoup) -> list[dict]:
@@ -71,14 +87,17 @@ def _extract_json_ld(soup: BeautifulSoup) -> list[dict]:
     return results
 
 
-def _listings_from_json_ld(json_ld_objects: list[dict], neighborhood: str, borough: str) -> list[Listing]:
-    """Extract Listing objects from JSON-LD structured data."""
+def _listings_from_json_ld(
+    json_ld_objects: list[dict], neighborhood: str, borough: str
+) -> list[Listing]:
     listings = []
     for obj in json_ld_objects:
         items = []
         if obj.get("@type") == "ItemList":
             items = obj.get("itemListElement", [])
-        elif obj.get("@type") in ("SingleFamilyResidence", "House", "Residence", "RealEstateListing"):
+        elif obj.get("@type") in (
+            "SingleFamilyResidence", "House", "Residence", "RealEstateListing"
+        ):
             items = [{"item": obj}]
         for element in items:
             item = element.get("item", element)
@@ -103,7 +122,6 @@ def _listings_from_json_ld(json_ld_objects: list[dict], neighborhood: str, borou
                     address_obj.get("addressRegion", ""),
                 ]
                 address = ", ".join(p for p in parts if p)
-            # beds
             beds_raw = item.get("numberOfRooms", 0) or item.get("numberOfBedrooms", 0)
             try:
                 beds = int(beds_raw or 0)
@@ -120,7 +138,8 @@ def _listings_from_json_ld(json_ld_objects: list[dict], neighborhood: str, borou
                 borough=borough,
                 price=price,
                 bedrooms=beds,
-                garage=True,  # we filtered by garage in the URL
+                garage=True,
+                garage_confirmed=False,
                 source="streeteasy",
                 listing_url=listing_url,
             ))
@@ -146,10 +165,10 @@ def _extract_embedded_json_state(soup: BeautifulSoup) -> dict:
     return {}
 
 
-def _listings_from_embedded_state(state: dict, neighborhood: str, borough: str) -> list[Listing]:
-    """Try to extract listings from embedded JS state object."""
+def _listings_from_embedded_state(
+    state: dict, neighborhood: str, borough: str
+) -> list[Listing]:
     listings = []
-    # StreetEasy state shape varies; try common paths
     candidates = []
     for key in ("listings", "searchResults", "results", "properties"):
         val = state.get(key)
@@ -168,7 +187,11 @@ def _listings_from_embedded_state(state: dict, neighborhood: str, borough: str) 
     for prop in candidates:
         if not isinstance(prop, dict):
             continue
-        url = prop.get("url", "") or prop.get("listingUrl", "") or prop.get("listing_url", "")
+        url = (
+            prop.get("url", "")
+            or prop.get("listingUrl", "")
+            or prop.get("listing_url", "")
+        )
         if not url:
             continue
         lid = f"se-{url.rstrip('/').split('/')[-1]}"
@@ -200,13 +223,16 @@ def _listings_from_embedded_state(state: dict, neighborhood: str, borough: str) 
             price=price,
             bedrooms=beds,
             garage=True,
+            garage_confirmed=False,
             source="streeteasy",
             listing_url=listing_url,
         ))
     return listings
 
 
-def _listings_from_html_cards(soup: BeautifulSoup, neighborhood: str, borough: str) -> list[Listing]:
+def _listings_from_html_cards(
+    soup: BeautifulSoup, neighborhood: str, borough: str
+) -> list[Listing]:
     """CSS-selector fallback. Tries multiple selector patterns."""
     cards = []
     for selector in _CARD_SELECTORS:
@@ -219,7 +245,6 @@ def _listings_from_html_cards(soup: BeautifulSoup, neighborhood: str, borough: s
     listings = []
     seen: set = set()
     for card in cards:
-        # Find link
         link_tag = (
             card.select_one("a[href*='/building/'], a[href*='/sale/']")
             or card.select_one("a.listingCard-globalLink")
@@ -234,7 +259,6 @@ def _listings_from_html_cards(soup: BeautifulSoup, neighborhood: str, borough: s
             continue
         seen.add(lid)
 
-        # Price
         price = 0
         price_tag = (
             card.select_one("[data-price]")
@@ -245,7 +269,6 @@ def _listings_from_html_cards(soup: BeautifulSoup, neighborhood: str, borough: s
             raw = price_tag.get("data-price") or price_tag.get_text()
             price = _parse_int(raw)
 
-        # Beds
         beds = 0
         beds_tag = (
             card.select_one("[class*='beds']")
@@ -255,7 +278,6 @@ def _listings_from_html_cards(soup: BeautifulSoup, neighborhood: str, borough: s
         if beds_tag:
             beds = _parse_int(beds_tag.get_text())
 
-        # Address
         addr_tag = (
             card.select_one("[class*='address']")
             or card.select_one("[class*='Address']")
@@ -263,7 +285,6 @@ def _listings_from_html_cards(soup: BeautifulSoup, neighborhood: str, borough: s
         )
         address = addr_tag.get_text(strip=True) if addr_tag else ""
 
-        # Photo
         photo = None
         img = card.select_one("img")
         if img:
@@ -278,6 +299,7 @@ def _listings_from_html_cards(soup: BeautifulSoup, neighborhood: str, borough: s
             price=price,
             bedrooms=beds,
             garage=True,
+            garage_confirmed=False,
             source="streeteasy",
             listing_url=listing_url,
             photo_url=photo,
@@ -292,46 +314,53 @@ class StreetEasySource(BaseSource):
         listings = []
         seen: set = set()
 
-        for neighborhood, borough, slug in _SEARCHES:
-            url = (
-                f"https://streeteasy.com/for-sale/{slug}"
-                f"?price=-{config['max_price']}"
-                f"&beds={config['min_bedrooms']}-{config['max_bedrooms']}"
-                f"&amenities=garage"
-            )
-            try:
-                resp = requests.get(url, headers=_HEADERS, timeout=20)
-            except Exception as e:
-                logger.warning("[streeteasy] request error for %s: %s", neighborhood, e)
-                continue
+        try:
+            with sync_playwright() as pw:
+                browser = pw.chromium.launch(headless=True)
+                try:
+                    context = browser.new_context(user_agent=_USER_AGENT)
+                    for neighborhood, borough, slug in _SEARCHES:
+                        url = (
+                            f"https://streeteasy.com/for-sale/{slug}"
+                            f"?price=-{config['max_price']}"
+                            f"&beds={config['min_bedrooms']}-{config['max_bedrooms']}"
+                            f"&amenities=garage"
+                        )
+                        page = context.new_page()
+                        try:
+                            page.goto(url, timeout=30_000)
+                            # Wait for network idle or the first known card selector
+                            try:
+                                page.wait_for_load_state("networkidle", timeout=30_000)
+                            except PlaywrightTimeoutError:
+                                pass  # still try to parse whatever loaded
+                            # Also try waiting for a listing card to appear
+                            for selector in _CARD_SELECTORS:
+                                try:
+                                    page.wait_for_selector(selector, timeout=5_000)
+                                    break
+                                except Exception:
+                                    continue
+                            html = page.content()
+                        except Exception as e:
+                            logger.warning(
+                                "[streeteasy] page load error for %s: %s", neighborhood, e
+                            )
+                            continue
+                        finally:
+                            page.close()
 
-            if resp.status_code != 200:
-                logger.warning(
-                    "[streeteasy] %s returned HTTP %s", neighborhood, resp.status_code
-                )
-                continue
-
-            soup = BeautifulSoup(resp.text, "lxml")
-            found: list[Listing] = []
-
-            # Strategy 1: JSON-LD
-            json_ld_objects = _extract_json_ld(soup)
-            if json_ld_objects:
-                found = _listings_from_json_ld(json_ld_objects, neighborhood, borough)
-
-            # Strategy 2: embedded JS state
-            if not found:
-                state = _extract_embedded_json_state(soup)
-                if state:
-                    found = _listings_from_embedded_state(state, neighborhood, borough)
-
-            # Strategy 3: HTML card parsing
-            if not found:
-                found = _listings_from_html_cards(soup, neighborhood, borough)
-
-            for listing in found:
-                if listing.listing_id not in seen:
-                    seen.add(listing.listing_id)
-                    listings.append(listing)
+                        found = _parse_html(html, neighborhood, borough)
+                        logger.info(
+                            "[streeteasy] %s: %d listings", neighborhood, len(found)
+                        )
+                        for listing in found:
+                            if listing.listing_id not in seen:
+                                seen.add(listing.listing_id)
+                                listings.append(listing)
+                finally:
+                    browser.close()
+        except Exception as e:
+            logger.error("[streeteasy] browser error: %s", e)
 
         return listings

@@ -33,11 +33,15 @@ class Database:
             )
         """)
         self.conn.commit()
-        try:
-            self.conn.execute("ALTER TABLE seen_listings ADD COLUMN is_favourite INTEGER DEFAULT 0")
-            self.conn.commit()
-        except Exception:
-            pass  # column already exists
+        for col, definition in [
+            ("is_favourite", "INTEGER DEFAULT 0"),
+            ("garage_confirmed", "INTEGER DEFAULT 0"),
+        ]:
+            try:
+                self.conn.execute(f"ALTER TABLE seen_listings ADD COLUMN {col} {definition}")
+                self.conn.commit()
+            except Exception:
+                pass  # column already exists
 
     def is_seen(self, listing: Listing) -> bool:
         row = self.conn.execute(

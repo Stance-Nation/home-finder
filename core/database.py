@@ -19,6 +19,7 @@ class Database:
                 price INTEGER,
                 bedrooms INTEGER,
                 garage INTEGER,
+                garage_confirmed INTEGER,
                 source TEXT,
                 listing_url TEXT,
                 photo_url TEXT,
@@ -43,11 +44,11 @@ class Database:
         self.conn.execute("""
             INSERT OR IGNORE INTO seen_listings
             (listing_id, address, neighborhood, borough, price, bedrooms,
-             garage, source, listing_url, photo_url, transit_minutes,
+             garage, garage_confirmed, source, listing_url, photo_url, transit_minutes,
              flip_flag, commute_flag, value_score, date_first_seen)
             VALUES
             (:listing_id, :address, :neighborhood, :borough, :price, :bedrooms,
-             :garage, :source, :listing_url, :photo_url, :transit_minutes,
+             :garage, :garage_confirmed, :source, :listing_url, :photo_url, :transit_minutes,
              :flip_flag, :commute_flag, :value_score, :date_first_seen)
         """, d)
         self.conn.commit()
@@ -67,6 +68,7 @@ class Database:
                 price=row["price"],
                 bedrooms=row["bedrooms"],
                 garage=bool(row["garage"]),
+                garage_confirmed=bool(row["garage_confirmed"]),
                 source=row["source"],
                 listing_url=row["listing_url"],
                 photo_url=row["photo_url"],

@@ -14,6 +14,7 @@ class Listing:
     source: str
     listing_url: str
     photo_url: Optional[str] = None
+    garage_confirmed: bool = False
     days_on_market: Optional[int] = None
     last_sale_price: Optional[int] = None
     last_sale_date: Optional[str] = None
@@ -27,6 +28,7 @@ class Listing:
     def to_dict(self) -> dict:
         d = asdict(self)
         d["garage"] = 1 if self.garage else 0
+        d["garage_confirmed"] = 1 if self.garage_confirmed else 0
         d["flip_flag"] = 1 if self.flip_flag else 0
         d["commute_flag"] = 1 if self.commute_flag else 0
         d["condition_keywords"] = ",".join(self.condition_keywords)

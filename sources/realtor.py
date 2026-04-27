@@ -53,11 +53,10 @@ class RealtorSource(BaseSource):
                 seen_ids.add(prop_id)
                 desc = (prop.get("description") or {})
                 prop_str = str(prop).lower()
-                garage = (
-                    int(desc.get("garage") or 0) > 0
-                    or "garage" in prop_str
-                    or "parking" in prop_str
-                )
+                garage_spaces = int(desc.get("garage") or 0)
+                garage_confirmed = garage_spaces > 0 or "garage" in prop_str
+                # Include listing unless explicitly no garage — unknown = assume possible
+                garage = True
                 location = prop.get("location", {}).get("address", {})
                 price = (prop.get("list_price") or 0)
                 listings.append(Listing(
@@ -68,6 +67,7 @@ class RealtorSource(BaseSource):
                     price=int(price),
                     bedrooms=int(desc.get("beds") or 0),
                     garage=garage,
+                    garage_confirmed=garage_confirmed,
                     source="realtor",
                     listing_url=f"https://www.realtor.com/realestateandhomes-detail/{prop_id}",
                     photo_url=(prop.get("primary_photo") or {}).get("href"),

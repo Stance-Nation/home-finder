@@ -7,6 +7,8 @@ def _card_html(listing: Listing, is_new: bool) -> str:
         flags.append('<span class="flag flip">⚠ Likely Flip</span>')
     if listing.commute_flag:
         flags.append('<span class="flag commute">⚠ Long Commute</span>')
+    if not listing.garage_confirmed:
+        flags.append('<span class="flag garage">⚠ Garage unconfirmed</span>')
     flag_html = " ".join(flags)
     new_badge = '<span class="badge-new">NEW</span>' if is_new else ""
     transit = f"{listing.transit_minutes} min" if listing.transit_minutes else "N/A"
@@ -58,6 +60,7 @@ def build_dashboard(all_listings: list, new_listing_ids: set) -> str:
   .flag{{font-size:12px;font-weight:bold;padding:2px 6px;border-radius:4px;margin-right:4px;}}
   .flag.flip{{background:#ffe0cc;color:#a03000;}}
   .flag.commute{{background:#fff3cd;color:#856404;}}
+  .flag.garage{{background:#e8f0fe;color:#1a56db;}}
   .card-link{{display:inline-block;background:#1a73e8;color:#fff;padding:7px 14px;border-radius:4px;text-decoration:none;font-size:13px;}}
   .card-source{{color:#aaa;font-size:11px;margin-top:6px;}}
   .badge-new{{position:absolute;top:12px;right:12px;background:#2c7a2c;color:#fff;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;}}

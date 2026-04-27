@@ -1,5 +1,6 @@
 import sqlite3
 from pathlib import Path
+from datetime import date, timedelta
 from core.models import Listing
 
 class Database:
@@ -27,10 +28,16 @@ class Database:
                 flip_flag INTEGER,
                 commute_flag INTEGER,
                 value_score REAL,
-                date_first_seen TEXT
+                date_first_seen TEXT,
+                is_favourite INTEGER DEFAULT 0
             )
         """)
         self.conn.commit()
+        try:
+            self.conn.execute("ALTER TABLE seen_listings ADD COLUMN is_favourite INTEGER DEFAULT 0")
+            self.conn.commit()
+        except Exception:
+            pass  # column already exists
 
     def is_seen(self, listing: Listing) -> bool:
         row = self.conn.execute(
@@ -41,16 +48,32 @@ class Database:
 
     def save(self, listing: Listing):
         d = listing.to_dict()
+        d.setdefault("is_favourite", 0)
         self.conn.execute("""
             INSERT OR IGNORE INTO seen_listings
             (listing_id, address, neighborhood, borough, price, bedrooms,
              garage, garage_confirmed, source, listing_url, photo_url, transit_minutes,
-             flip_flag, commute_flag, value_score, date_first_seen)
+             flip_flag, commute_flag, value_score, date_first_seen, is_favourite)
             VALUES
             (:listing_id, :address, :neighborhood, :borough, :price, :bedrooms,
              :garage, :garage_confirmed, :source, :listing_url, :photo_url, :transit_minutes,
-             :flip_flag, :commute_flag, :value_score, :date_first_seen)
+             :flip_flag, :commute_flag, :value_score, :date_first_seen, :is_favourite)
         """, d)
+        self.conn.commit()
+
+    def cleanup_expired(self, days: int = 7, favourite_ids: set = None):
+        favourite_ids = favourite_ids or set()
+        cutoff = (date.today() - timedelta(days=days)).isoformat()
+        # Mark known favourites in DB
+        for fid in favourite_ids:
+            self.conn.execute(
+                "UPDATE seen_listings SET is_favourite = 1 WHERE listing_id = ?", (fid,)
+            )
+        # Delete expired non-favourites
+        self.conn.execute(
+            "DELETE FROM seen_listings WHERE date_first_seen < ? AND is_favourite = 0",
+            (cutoff,)
+        )
         self.conn.commit()
 
     def filter_new(self, listings: list) -> list:

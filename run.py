@@ -9,6 +9,14 @@ def load_config():
     with open("config.json") as f:
         return json.load(f)
 
+def load_favourites() -> set:
+    import json as _json
+    try:
+        with open("favourites.json") as f:
+            return set(_json.load(f).get("favourites", []))
+    except Exception:
+        return set()
+
 def main():
     parser = argparse.ArgumentParser(description="NYC Home Finder Agent")
     parser.add_argument("--report", action="store_true", help="Print current listings without fetching")
@@ -78,6 +86,9 @@ def main():
 
     from core.database import Database
     db = Database()
+    favourite_ids = load_favourites()
+    db.cleanup_expired(days=7, favourite_ids=favourite_ids)
+    print(f"[agent] Expired listings cleaned up. Favourites preserved: {len(favourite_ids)}")
     new_listings = db.filter_new(scored)
     print(f"[agent] New listings (not seen before): {len(new_listings)}")
 

@@ -1,9 +1,12 @@
+import logging
 import re
 import hashlib
 import requests
 from bs4 import BeautifulSoup
 from core.models import Listing
 from sources.base import BaseSource
+
+logger = logging.getLogger(__name__)
 
 BROKERAGE_CONFIGS = [
     {"name": "brown_harris_stevens", "display": "Brown Harris Stevens",
@@ -78,12 +81,7 @@ BROKERAGE_CONFIGS = [
      "price_selector": ".price", "beds_selector": ".beds",
      "link_selector": "a", "base_url": "https://www.livingny.com",
      "neighborhoods": ["Forest Hills", "Kew Gardens", "Pelham Bay", "Morris Park"]},
-    {"name": "morrell_hirsch", "display": "Morrell Hirsch",
-     "search_url": "https://www.morrellhirsch.com/listings/?status=for-sale&max_price={max_price}&beds={min_beds}&neighborhood={neighborhood}",
-     "card_selector": ".listing-item, .property", "address_selector": ".address",
-     "price_selector": ".price", "beds_selector": ".beds",
-     "link_selector": "a", "base_url": "https://www.morrellhirsch.com",
-     "neighborhoods": ["Forest Hills", "Kew Gardens", "Richmond Hill"]},
+    # morrell_hirsch removed — www.morrellhirsch.com does not resolve DNS (domain defunct)
     {"name": "realny", "display": "RealNY / RealNYProperties",
      "search_url": "https://www.realny.com/sale?neighborhood={neighborhood}&max_price={max_price}&beds_min={min_beds}",
      "card_selector": ".listing-card, .property", "address_selector": ".address",
@@ -151,9 +149,22 @@ class BrokerageSource(BaseSource):
         self.cfg = brokerage_config
         self.name = brokerage_config["name"]
 
+    # Brokerage headers — more realistic to avoid bot-detection
+    _HEADERS = {
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/124.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "DNT": "1",
+    }
+
     def fetch(self, config: dict) -> list:
         listings = []
-        seen = set()
+        seen: set = set()
         for neighborhood in self.cfg["neighborhoods"]:
             slug = _NEIGHBORHOOD_SLUGS.get(neighborhood, neighborhood.lower().replace(" ", "-"))
             url = self.cfg["search_url"].format(
@@ -164,8 +175,11 @@ class BrokerageSource(BaseSource):
                 neighborhood_slug=slug,
             )
             try:
-                resp = requests.get(url, headers=self._HEADERS, timeout=15)
+                resp = requests.get(url, headers=self._HEADERS, timeout=20)
                 if resp.status_code != 200:
+                    logger.warning(
+                        "[%s] %s returned HTTP %s", self.name, neighborhood, resp.status_code
+                    )
                     continue
                 soup = BeautifulSoup(resp.text, "lxml")
                 for card in soup.select(self.cfg["card_selector"]):
@@ -198,9 +212,16 @@ class BrokerageSource(BaseSource):
                         source=self.cfg["display"],
                         listing_url=full_url,
                     ))
+            except requests.exceptions.SSLError as e:
+                logger.warning("[%s] SSL error for %s: %s", self.name, neighborhood, e)
+            except requests.exceptions.ConnectionError as e:
+                logger.warning(
+                    "[%s] Connection error for %s (DNS/reset?): %s", self.name, neighborhood, e
+                )
+            except requests.exceptions.Timeout:
+                logger.warning("[%s] Timeout for %s", self.name, neighborhood)
             except Exception as e:
-                print(f"[{self.name}] {neighborhood} failed: {e}")
-                continue
+                logger.warning("[%s] %s failed: %s", self.name, neighborhood, e)
         return listings
 
 

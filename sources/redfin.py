@@ -96,9 +96,22 @@ class RedfinSource(BaseSource):
                     row.get("ZIP OR POSTAL CODE", ""),
                 ]
                 address = ", ".join(p for p in address_parts if p)
-                garage = _garage_from_row(row)
+                # We searched with has_garage=1 so assume garage present;
+                # confirm only when CSV data explicitly says so.
+                garage_confirmed = _garage_from_row(row)
                 dom_raw = row.get("DAYS ON MARKET", "")
                 dom = _parse_int(dom_raw) if dom_raw else None
+                prop_type_raw = (row.get("PROPERTY TYPE") or "").lower()
+                type_map = {
+                    "single family residential": "single_family",
+                    "single-family home": "single_family",
+                    "multi-family (2-4 unit)": "multi_family",
+                    "townhouse": "townhouse",
+                    "vacant land": "land",
+                    "condo/co-op": "condo",
+                    "condo": "condo",
+                }
+                prop_type = type_map.get(prop_type_raw, "")
 
                 listings.append(Listing(
                     listing_id=lid,
@@ -107,11 +120,12 @@ class RedfinSource(BaseSource):
                     borough=borough,
                     price=price,
                     bedrooms=beds,
-                    garage=garage,
-                    garage_confirmed=garage,
+                    garage=True,
+                    garage_confirmed=garage_confirmed,
                     source="redfin",
                     listing_url=listing_url,
                     days_on_market=dom,
+                    property_type=prop_type,
                 ))
 
         return listings

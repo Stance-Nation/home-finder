@@ -1,5 +1,14 @@
 from datetime import date
+from urllib.parse import quote
 from core.models import Listing
+
+def _maps_url(address: str) -> str:
+    return (
+        "https://www.google.com/maps/dir/?api=1"
+        f"&origin={quote(address)}"
+        "&destination=200+5th+Ave%2C+New+York%2C+NY+10010"
+        "&travelmode=transit"
+    )
 
 def _stars(score: float) -> str:
     if score is None:
@@ -35,7 +44,8 @@ def format_listing(listing: Listing) -> str:
         f"{type_str}"
         f"  {listing.bedrooms} bed · ${listing.price:,} · Garage ✓ · Transit: {transit}\n"
         f"  Source: {listing.source}{flag_str}\n"
-        f"  {listing.listing_url}"
+        f"  {listing.listing_url}\n"
+        f"  🚇 Transit map: {_maps_url(listing.address)}"
     )
 
 def format_report(listings: list, new_count: int) -> str:

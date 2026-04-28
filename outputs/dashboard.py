@@ -1,5 +1,16 @@
 from datetime import date, timedelta
+from urllib.parse import quote
 from core.models import Listing
+
+_DESTINATION = "200 5th Ave, New York, NY 10010"
+
+def _maps_url(address: str) -> str:
+    return (
+        "https://www.google.com/maps/dir/?api=1"
+        f"&origin={quote(address)}"
+        f"&destination={quote(_DESTINATION)}"
+        "&travelmode=transit"
+    )
 
 def _is_new(listing: Listing) -> bool:
     try:
@@ -48,6 +59,7 @@ def _card_html(listing: Listing) -> str:
         <div class="card-score">Value score: {score_pct}/100</div>
         <div class="card-flags">{flag_html}</div>
         <a class="card-link" href="{listing.listing_url}" target="_blank">View Listing</a>
+        <a class="card-link transit-link" href="{_maps_url(listing.address)}" target="_blank">🚇 Transit to Flatiron</a>
         <div class="card-source">via {listing.source}</div>
         <div class="card-seen">First seen: {listing.date_first_seen}</div>
     </div>"""
@@ -88,7 +100,8 @@ def build_dashboard(all_listings: list, new_listing_ids: set) -> str:
   .flag.flip{{background:#ffe0cc;color:#a03000;}}
   .flag.commute{{background:#fff3cd;color:#856404;}}
   .flag.garage{{background:#e8f0fe;color:#1a56db;}}
-  .card-link{{display:inline-block;background:#1a73e8;color:#fff;padding:7px 14px;border-radius:4px;text-decoration:none;font-size:13px;}}
+  .card-link{{display:inline-block;background:#1a73e8;color:#fff;padding:7px 14px;border-radius:4px;text-decoration:none;font-size:13px;margin-right:6px;margin-bottom:6px;}}
+  .transit-link{{background:#1e6b3e;}}
   .card-source{{color:#aaa;font-size:11px;margin-top:6px;}}
   .badge-new{{position:absolute;top:12px;left:12px;background:#2c7a2c;color:#fff;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;}}
   .badge{{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;margin-right:4px;margin-bottom:4px;}}

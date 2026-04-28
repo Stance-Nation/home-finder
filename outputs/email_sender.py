@@ -4,7 +4,18 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import date
+from urllib.parse import quote
 from core.models import Listing
+
+_DESTINATION = "200 5th Ave, New York, NY 10010"
+
+def _maps_url(address: str) -> str:
+    return (
+        "https://www.google.com/maps/dir/?api=1"
+        f"&origin={quote(address)}"
+        f"&destination={quote(_DESTINATION)}"
+        "&travelmode=transit"
+    )
 
 SUBSCRIBERS_FILE = "subscribers.json"
 
@@ -40,8 +51,9 @@ def _listing_card_html(listing: Listing) -> str:
         <div style="margin:4px 0;color:#555;">Value score: {score_pct}/100</div>
         {flags_html}
         <div style="margin-top:12px;">
-            <a href="{listing.listing_url}" style="background:#1a73e8;color:#fff;padding:8px 16px;border-radius:4px;text-decoration:none;font-size:14px;">View Listing</a>
-            &nbsp;<span style="color:#888;font-size:12px;">via {listing.source}</span>
+            <a href="{listing.listing_url}" style="background:#1a73e8;color:#fff;padding:8px 16px;border-radius:4px;text-decoration:none;font-size:14px;margin-right:8px;">View Listing</a>
+            <a href="{_maps_url(listing.address)}" style="background:#1e6b3e;color:#fff;padding:8px 16px;border-radius:4px;text-decoration:none;font-size:14px;">🚇 Transit to Flatiron</a>
+            <div style="color:#888;font-size:12px;margin-top:6px;">via {listing.source}</div>
         </div>
     </div>"""
 

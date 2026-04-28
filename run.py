@@ -17,6 +17,13 @@ def load_favourites() -> set:
     except Exception:
         return set()
 
+def load_dismissed() -> set:
+    try:
+        with open("dismissed.json") as f:
+            return set(json.load(f).get("dismissed", []))
+    except Exception:
+        return set()
+
 def main():
     parser = argparse.ArgumentParser(description="NYC Home Finder Agent")
     parser.add_argument("--report", action="store_true", help="Print current listings without fetching")
@@ -87,8 +94,11 @@ def main():
     from core.database import Database
     db = Database()
     favourite_ids = load_favourites()
+    dismissed_ids = load_dismissed()
     db.cleanup_expired(days=7, favourite_ids=favourite_ids)
+    db.remove_dismissed(dismissed_ids)
     print(f"[agent] Expired listings cleaned up. Favourites preserved: {len(favourite_ids)}")
+    scored = [l for l in scored if l.listing_id not in dismissed_ids]
     new_listings = db.filter_new(scored)
     print(f"[agent] New listings (not seen before): {len(new_listings)}")
 

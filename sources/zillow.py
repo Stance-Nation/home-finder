@@ -44,7 +44,7 @@ class ZillowSource(BaseSource):
         seen_zpids: set = set()
 
         for neighborhood, borough, location in self._SEARCHES:
-            time.sleep(1)  # stay within RapidAPI free-tier rate limit
+            time.sleep(4)  # stay within RapidAPI free-tier rate limit
             props = self._fetch_location(headers, config, location)
             for prop in props:
                 zpid = str(prop.get("zpid", ""))
@@ -133,8 +133,9 @@ class ZillowSource(BaseSource):
                 if props is not None:
                     return props
             elif resp.status_code == 429:
-                logger.warning("[zillow] rate limited on %s — skipping fallback", location)
-                return []
+                logger.warning("[zillow] rate limited on primary for %s — waiting 10s before fallback", location)
+                time.sleep(10)
+                # fall through to fallback
             elif resp.status_code not in (404, 422):
                 logger.warning(
                     "[zillow] primaryEndpoint %s returned %s", location, resp.status_code

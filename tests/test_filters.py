@@ -34,9 +34,15 @@ def test_wrong_neighborhood_excluded():
     results = apply_hard_filters([make_listing(neighborhood="Astoria")], CONFIG)
     assert len(results) == 0
 
-def test_no_garage_excluded():
-    results = apply_hard_filters([make_listing(garage=False)], CONFIG)
+def test_confirmed_no_garage_excluded():
+    # Only excluded when garage absence is explicitly confirmed (garage_confirmed=True, garage=False)
+    results = apply_hard_filters([make_listing(garage=False, garage_confirmed=True)], CONFIG)
     assert len(results) == 0
+
+def test_unconfirmed_no_garage_passes():
+    # garage=False with garage_confirmed=False means unknown — should pass (shown with badge)
+    results = apply_hard_filters([make_listing(garage=False, garage_confirmed=False)], CONFIG)
+    assert len(results) == 1
 
 def test_too_many_bedrooms_excluded():
     results = apply_hard_filters([make_listing(bedrooms=4)], CONFIG)

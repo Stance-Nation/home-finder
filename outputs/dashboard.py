@@ -46,11 +46,13 @@ def _card_html(listing: Listing) -> str:
     score_pct = int((listing.value_score or 0) * 100)
     photo_html = f'<img class="card-photo" src="{listing.photo_url}" onerror="this.style.display=\'none\'" />' if listing.photo_url else ""
     lid = listing.listing_id.replace('"', '')
+    dismiss_btn = f'<button class="dismiss-btn" onclick="dismissListing(\'{lid}\')" title="Permanently remove this listing">✕</button>'
     return f"""
     <div class="card" id="card-{lid}" data-id="{lid}">
         {new_badge}
         {badges}
         <button class="fav-btn" onclick="toggleFav('{lid}')" title="Favourite this listing">☆</button>
+        {dismiss_btn}
         {photo_html}
         <div class="card-address">{listing.address}</div>
         <div class="card-meta">{listing.neighborhood} · {listing.borough}</div>
@@ -108,6 +110,8 @@ def build_dashboard(all_listings: list, new_listing_ids: set) -> str:
   .badge-type{{background:#6b7280;color:#fff;}}
   .fav-btn{{position:absolute;top:10px;right:10px;background:none;border:none;font-size:22px;cursor:pointer;line-height:1;padding:2px;}}
   .fav-btn.active{{color:#f5a623;}}
+  .dismiss-btn{{position:absolute;top:10px;right:38px;background:none;border:none;font-size:16px;cursor:pointer;color:#bbb;line-height:1;padding:2px;}}
+  .dismiss-btn:hover{{color:#e53e3e;}}
   .meta-bar{{background:#fff;border-radius:8px;padding:12px 20px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;gap:24px;align-items:center;flex-wrap:wrap;}}
   .meta-bar span{{color:#555;font-size:14px;}}
   .sync-panel{{background:#fff;border-radius:8px;padding:16px 20px;margin-top:32px;border:1px solid #ddd;}}
@@ -135,6 +139,12 @@ def build_dashboard(all_listings: list, new_listing_ids: set) -> str:
   <p>You've starred some listings. To make sure they never expire, copy the JSON below and paste it into <strong>favourites.json</strong> in your GitHub repo (click the pencil icon to edit it).</p>
   <textarea id="fav-json" rows="4" readonly></textarea>
   <button class="sync-btn" onclick="copyFavJson()">Copy to clipboard</button>
+</div>
+<div class="sync-panel">
+  <h3>Sync Dismissed Listings (<span id="dismissed-count">0</span>)</h3>
+  <p>Copy this JSON and paste it into <code>dismissed.json</code> in your GitHub repo to permanently prevent dismissed listings from reappearing.</p>
+  <textarea id="dismissed-output" readonly rows="4" style="width:100%;font-size:12px;font-family:monospace;"></textarea>
+  <button onclick="navigator.clipboard.writeText(document.getElementById('dismissed-output').value).then(()=>alert('Copied!'))">Copy to clipboard</button>
 </div>
 <script>
   const FAV_KEY = 'hf_favourites';
@@ -173,7 +183,33 @@ def build_dashboard(all_listings: list, new_listing_ids: set) -> str:
     setTimeout(() => event.target.textContent = 'Copy to clipboard', 2000);
   }}
 
-  document.addEventListener('DOMContentLoaded', renderFavs);
+  function dismissListing(id) {{
+    if (!confirm('Permanently remove this listing? It will never appear again.')) return;
+    let dismissed = JSON.parse(localStorage.getItem('dismissed') || '[]');
+    if (!dismissed.includes(id)) dismissed.push(id);
+    localStorage.setItem('dismissed', JSON.stringify(dismissed));
+    const card = document.getElementById('card-' + id);
+    if (card) card.style.display = 'none';
+    updateDismissedOutput();
+  }}
+
+  function updateDismissedOutput() {{
+    const dismissed = JSON.parse(localStorage.getItem('dismissed') || '[]');
+    const el = document.getElementById('dismissed-output');
+    if (el) el.textContent = JSON.stringify({{"dismissed": dismissed}}, null, 2);
+    const countEl = document.getElementById('dismissed-count');
+    if (countEl) countEl.textContent = dismissed.length;
+  }}
+
+  document.addEventListener('DOMContentLoaded', function() {{
+    renderFavs();
+    const dismissed = JSON.parse(localStorage.getItem('dismissed') || '[]');
+    dismissed.forEach(id => {{
+      const card = document.getElementById('card-' + id);
+      if (card) card.style.display = 'none';
+    }});
+    updateDismissedOutput();
+  }});
 </script>
 </body></html>"""
 

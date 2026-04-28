@@ -24,7 +24,7 @@ def apply_hard_filters(listings: list, config: dict) -> list:
             fail_hoa += 1
         elif l.property_type != "land" and (l.bedrooms < config["min_bedrooms"] or l.bedrooms > config["max_bedrooms"]):
             fail_beds += 1
-        elif config["require_garage"] and not l.garage and l.property_type != "land":
+        elif l.garage_confirmed and not l.garage and l.property_type != "land":
             fail_garage += 1
         else:
             passed.append(l)
@@ -47,6 +47,6 @@ def _passes(listing: Listing, config: dict) -> bool:
         return False
     if listing.property_type != "land" and (listing.bedrooms < config["min_bedrooms"] or listing.bedrooms > config["max_bedrooms"]):
         return False
-    if config["require_garage"] and not listing.garage and listing.property_type != "land":
+    if listing.garage_confirmed and not listing.garage and listing.property_type != "land":
         return False
     return True

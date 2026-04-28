@@ -2,7 +2,7 @@
   "max_price": 900000,
   "min_bedrooms": 2,
   "max_bedrooms": 3,
-  "require_garage": true,
+  "require_garage": false,
   "commute_flag_minutes": 70,
   "commute_hard_limit_minutes": 70,
   "flip_price_increase_threshold": 0.25,

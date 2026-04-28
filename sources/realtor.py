@@ -11,17 +11,18 @@ class RealtorSource(BaseSource):
         "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com",
     }
 
-    _NEIGHBORHOOD_CITIES = [
-        ("Forest Hills", "Queens", "NY"),
-        ("Kew Gardens", "Queens", "NY"),
-        ("Richmond Hill", "Queens", "NY"),
-        ("South Richmond Hill", "Queens", "NY"),
-        ("Pelham Bay", "Bronx", "NY"),
-        ("Morris Park", "Bronx", "NY"),
-        ("Country Club", "Bronx", "NY"),
-        ("Kew Garden Hills", "Queens", "NY"),
-        ("Pelham Gardens", "Bronx", "NY"),
-        ("Pelham Parkway", "Bronx", "NY"),
+    # (label, borough, postal_code)
+    _NEIGHBORHOOD_ZIPS = [
+        ("Forest Hills",        "Queens", "11375"),
+        ("Kew Gardens",         "Queens", "11415"),
+        ("Kew Garden Hills",    "Queens", "11367"),
+        ("Richmond Hill",       "Queens", "11418"),
+        ("South Richmond Hill", "Queens", "11419"),
+        ("Pelham Gardens",      "Bronx",  "10469"),
+        ("Pelham Bay",          "Bronx",  "10461"),
+        ("Pelham Parkway",      "Bronx",  "10462"),
+        ("Morris Park",         "Bronx",  "10462"),
+        ("Country Club",        "Bronx",  "10464"),
     ]
 
     def fetch(self, config: dict) -> list:
@@ -30,7 +31,7 @@ class RealtorSource(BaseSource):
         listings = []
         seen_ids = set()
 
-        for neighborhood, borough, state in self._NEIGHBORHOOD_CITIES:
+        for neighborhood, borough, postal_code in self._NEIGHBORHOOD_ZIPS:
             payload = {
                 "limit": 50,
                 "offset": 0,
@@ -39,8 +40,7 @@ class RealtorSource(BaseSource):
                     "beds": {"min": config["min_bedrooms"], "max": config["max_bedrooms"]},
                     "prop_type": ["single_family", "multi_family", "townhomes", "land"],
                 },
-                "city": neighborhood,
-                "state_code": state,
+                "postal_code": postal_code,
                 "sort": {"direction": "desc", "field": "list_date"},
             }
             resp = requests.post(self._BASE_URL, headers=headers, json=payload, timeout=15)
@@ -75,7 +75,7 @@ class RealtorSource(BaseSource):
                 price = (prop.get("list_price") or 0)
                 listings.append(Listing(
                     listing_id=f"realtor-{prop_id}",
-                    address=f"{location.get('line','')}, {location.get('city','')}, {state}",
+                    address=f"{location.get('line','')}, {location.get('city','')}, NY",
                     neighborhood=neighborhood,
                     borough=borough,
                     price=int(price),

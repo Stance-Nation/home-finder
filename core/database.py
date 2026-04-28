@@ -84,6 +84,11 @@ class Database:
         )
         self.conn.commit()
 
+    def remove_dismissed(self, dismissed_ids: set):
+        for did in dismissed_ids:
+            self.conn.execute("DELETE FROM seen_listings WHERE listing_id = ?", (did,))
+        self.conn.commit()
+
     def filter_new(self, listings: list) -> list:
         return [l for l in listings if not self.is_seen(l)]
 

@@ -120,7 +120,10 @@ def main():
     if not args.no_email and new_listings:
         from outputs.email_sender import send_email
         dashboard_url = os.environ.get("DASHBOARD_URL", "")
-        send_email(new_listings, len(all_db_listings), dashboard_url, config)
+        try:
+            send_email(new_listings, len(all_db_listings), dashboard_url, config)
+        except Exception as e:
+            print(f"[email] Failed to send email: {e}")
 
     print(f"[agent] Done. {len(new_listings)} new listings processed.")
 

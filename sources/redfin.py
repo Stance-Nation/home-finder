@@ -87,13 +87,20 @@ class RedfinSource(BaseSource):
                     continue
                 seen.add(lid)
 
+                # Reject listings outside NYC zip ranges.
+                # Wrong region_ids can return upstate NY results (13xxx, 14xxx).
+                # Valid: Bronx 104xx, Queens 113xx/114xx/116xx.
+                zip_code = row.get("ZIP OR POSTAL CODE", "").strip()
+                if zip_code and not zip_code.startswith(("104", "113", "114", "116")):
+                    continue
+
                 price = _parse_int(row.get("PRICE", ""))
                 beds = _parse_int(row.get("BEDS", ""))
                 address_parts = [
                     row.get("ADDRESS", ""),
                     row.get("CITY", ""),
                     row.get("STATE OR PROVINCE", ""),
-                    row.get("ZIP OR POSTAL CODE", ""),
+                    zip_code,
                 ]
                 address = ", ".join(p for p in address_parts if p)
                 # We searched with has_garage=1 so assume garage present;

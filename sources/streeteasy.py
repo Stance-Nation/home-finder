@@ -6,6 +6,12 @@ from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeo
 from core.models import Listing
 from sources.base import BaseSource
 
+try:
+    from playwright_stealth import stealth_sync as _stealth_sync
+    _STEALTH_AVAILABLE = True
+except ImportError:
+    _STEALTH_AVAILABLE = False
+
 logger = logging.getLogger(__name__)
 
 _USER_AGENT = (
@@ -318,7 +324,12 @@ class StreetEasySource(BaseSource):
             with sync_playwright() as pw:
                 browser = pw.chromium.launch(headless=True)
                 try:
-                    context = browser.new_context(user_agent=_USER_AGENT)
+                    context = browser.new_context(
+                        user_agent=_USER_AGENT,
+                        locale="en-US",
+                        timezone_id="America/New_York",
+                        viewport={"width": 1280, "height": 800},
+                    )
                     for neighborhood, borough, slug in _SEARCHES:
                         url = (
                             f"https://streeteasy.com/for-sale/{slug}"
@@ -327,8 +338,10 @@ class StreetEasySource(BaseSource):
                             f"&amenities=garage"
                         )
                         page = context.new_page()
+                        if _STEALTH_AVAILABLE:
+                            _stealth_sync(page)
                         try:
-                            page.goto(url, timeout=30_000)
+                            page.goto(url, timeout=45_000)
                             # Wait for network idle or the first known card selector
                             try:
                                 page.wait_for_load_state("networkidle", timeout=30_000)

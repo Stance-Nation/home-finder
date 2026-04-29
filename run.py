@@ -2,8 +2,21 @@
 import os
 import sys
 import json
+import re as _re
 import argparse
 from datetime import date
+
+
+def _normalize_addr(addr: str) -> str:
+    """Normalise a street address to bare street portion for deduplication.
+
+    Takes only the part before the first comma, lowercases it, strips all
+    non-alphanumeric characters and collapses whitespace so that minor
+    formatting differences between sources don't prevent matching.
+    """
+    part = addr.split(",")[0].lower()
+    part = _re.sub(r"[^a-z0-9\s]", "", part)
+    return " ".join(part.split())
 
 def load_config():
     with open("config.json") as f:
@@ -82,6 +95,10 @@ def main():
             print(f"[transit] No subway route: {listing.address} — excluded")
             continue
         listing.transit_minutes = minutes
+        hard_limit = config.get("commute_hard_limit_minutes", 85)
+        if minutes > hard_limit:
+            print(f"[transit] {minutes}min exceeds {hard_limit}min limit: {listing.address} — excluded")
+            continue
         transit_passed.append(listing)
     print(f"[agent] After transit filter: {len(transit_passed)}")
 
@@ -90,6 +107,24 @@ def main():
 
     from core.scorer import score_all
     scored = score_all(flagged)
+
+    # Within-run deduplication: keep highest-scored listing per unique address
+    addr_map: dict = {}
+    for listing in scored:
+        key = _normalize_addr(listing.address)
+        if not key:
+            continue
+        existing = addr_map.get(key)
+        if existing is None:
+            addr_map[key] = listing
+        else:
+            def rank(l):
+                return (l.garage_confirmed, l.photo_url is not None, l.value_score or 0)
+            if rank(listing) > rank(existing):
+                addr_map[key] = listing
+    pre_dedup = len(scored)
+    scored = list(addr_map.values())
+    print(f"[agent] After address dedup: {len(scored)} (dropped {pre_dedup - len(scored)} duplicates)")
 
     from core.database import Database
     db = Database()
@@ -100,6 +135,12 @@ def main():
     print(f"[agent] Expired listings cleaned up. Favourites preserved: {len(favourite_ids)}")
     scored = [l for l in scored if l.listing_id not in dismissed_ids]
     new_listings = db.filter_new(scored)
+    # Cross-run deduplication: skip listings whose address already exists in DB
+    existing_addresses = db.get_normalized_addresses()
+    new_listings = [
+        l for l in new_listings
+        if _normalize_addr(l.address) not in existing_addresses
+    ]
     print(f"[agent] New listings (not seen before): {len(new_listings)}")
 
     for listing in new_listings:

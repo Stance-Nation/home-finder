@@ -4,7 +4,7 @@
   "max_bedrooms": 3,
   "require_garage": false,
   "commute_flag_minutes": 70,
-  "commute_hard_limit_minutes": 70,
+  "commute_hard_limit_minutes": 85,
   "flip_price_increase_threshold": 0.25,
   "flip_lookback_months": 12,
   "commute_destination": "200 5th Avenue, New York, NY 10010",

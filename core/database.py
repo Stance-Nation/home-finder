@@ -92,6 +92,19 @@ class Database:
     def filter_new(self, listings: list) -> list:
         return [l for l in listings if not self.is_seen(l)]
 
+    def get_normalized_addresses(self) -> set:
+        import re
+        rows = self.conn.execute("SELECT address FROM seen_listings").fetchall()
+        result = set()
+        for row in rows:
+            addr = row["address"] or ""
+            part = addr.split(",")[0].lower()
+            part = re.sub(r"[^a-z0-9\s]", "", part)
+            normalized = " ".join(part.split())
+            if normalized:
+                result.add(normalized)
+        return result
+
     def get_all(self) -> list:
         rows = self.conn.execute("SELECT * FROM seen_listings").fetchall()
         results = []

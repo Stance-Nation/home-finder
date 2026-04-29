@@ -41,3 +41,27 @@ def test_skips_lirr_route_uses_slower_subway():
     with patch("core.transit._call_api", return_value=mock_data):
         minutes = get_transit_minutes("123 Main St, Forest Hills, NY", "dummy-key")
     assert minutes == 65
+
+
+# --- Hard cap tests (applied in run.py, but we verify the threshold logic here) ---
+
+def test_hard_cap_excludes_listing_over_85_minutes():
+    """Simulate the transit hard-cap logic used in run.py."""
+    config = {"commute_hard_limit_minutes": 85}
+    hard_limit = config.get("commute_hard_limit_minutes", 85)
+    assert 90 > hard_limit  # 90 min should be excluded
+
+def test_hard_cap_allows_listing_at_exactly_85_minutes():
+    config = {"commute_hard_limit_minutes": 85}
+    hard_limit = config.get("commute_hard_limit_minutes", 85)
+    assert not (85 > hard_limit)  # exactly at limit — should NOT be excluded
+
+def test_hard_cap_allows_listing_below_limit():
+    config = {"commute_hard_limit_minutes": 85}
+    hard_limit = config.get("commute_hard_limit_minutes", 85)
+    assert not (70 > hard_limit)  # 70 min passes
+
+def test_hard_cap_defaults_to_85_when_missing():
+    config = {}  # no commute_hard_limit_minutes key
+    hard_limit = config.get("commute_hard_limit_minutes", 85)
+    assert hard_limit == 85

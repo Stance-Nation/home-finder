@@ -17,6 +17,6 @@
   ],
   "allowed_property_types": ["single_family", "multi_family", "townhouse", "land"],
   "excluded_property_types": ["condo", "apartment", "co_op", "mobile"],
-  "sender_email": "RC-KBHomes@gmail.com",
+  "sender_email": "rc.kb.homes@gmail.com",
   "run_time_utc": "13:00"
 }

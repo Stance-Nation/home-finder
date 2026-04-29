@@ -13,14 +13,7 @@ def _maps_url(address: str) -> str:
         "&travelmode=transit"
     )
 
-def _is_new(listing: Listing) -> bool:
-    try:
-        first_seen = date.fromisoformat(listing.date_first_seen)
-        return (date.today() - first_seen).days <= 7
-    except Exception:
-        return False
-
-def _card_html(listing: Listing) -> str:
+def _card_html(listing: Listing, is_new: bool = False) -> str:
     flags = []
     if listing.flip_flag:
         flags.append('<span class="flag flip">&#9888; Likely Flip</span>')
@@ -42,7 +35,7 @@ def _card_html(listing: Listing) -> str:
     if listing.property_type:
         label = type_labels.get(listing.property_type, listing.property_type.replace("_", " ").title())
         badges += f'<span class="badge badge-type">{label}</span>'
-    new_badge = '<span class="badge-new">NEW</span>' if _is_new(listing) else ""
+    new_badge = '<span class="badge-new">NEW</span>' if is_new else ""
     transit = f"{listing.transit_minutes} min" if listing.transit_minutes else "N/A"
     score_pct = int((listing.value_score or 0) * 100)
     if listing.photo_url:
@@ -82,8 +75,9 @@ def _card_html(listing: Listing) -> str:
 
 def _listing_to_json_obj(listing: Listing) -> dict:
     """Serialise a Listing to a plain dict suitable for embedding in JSON."""
+    lid = listing.listing_id.replace('"', '')
     return {
-        "listing_id": listing.listing_id,
+        "listing_id": lid,
         "address": listing.address,
         "neighborhood": listing.neighborhood,
         "borough": listing.borough,
@@ -104,14 +98,14 @@ def _listing_to_json_obj(listing: Listing) -> dict:
 
 def build_dashboard(all_listings: list, new_listing_ids: set) -> str:
     today = date.today().strftime("%B %d, %Y")
-    new_listings = [l for l in all_listings if _is_new(l)]
-    older_listings = [l for l in all_listings if not _is_new(l)]
-    new_cards = "".join(_card_html(l) for l in new_listings)
-    older_cards = "".join(_card_html(l) for l in older_listings)
+    new_listings = [l for l in all_listings if l.listing_id in new_listing_ids]
+    older_listings = [l for l in all_listings if l.listing_id not in new_listing_ids]
+    new_cards = "".join(_card_html(l, is_new=True) for l in new_listings)
+    older_cards = "".join(_card_html(l, is_new=False) for l in older_listings)
 
     new_section = f"""
     <section>
-        <h2>New This Week ({len(new_listings)})</h2>
+        <h2>New Today ({len(new_listings)})</h2>
         <div class="grid">{new_cards if new_cards else "<p>No new listings this week.</p>"}</div>
     </section>""" if new_listings else ""
 
@@ -191,7 +185,7 @@ def build_dashboard(all_listings: list, new_listing_ids: set) -> str:
 <div class="meta-bar">
   <span>&#x1F4C5; Last updated: {today}</span>
   <span>&#x1F3D8; {len(all_listings)} total matches</span>
-  <span>&#x1F195; {len(new_listings)} new this week</span>
+  <span>&#x1F195; {len(new_listings)} new today</span>
   <span>&#x1F4CD; Queens &amp; Bronx | &le;$900k | 2&ndash;3 bed | Garage required</span>
   <a class="fav-page-link" href="favourites.html">&#11088; View Favourites</a>
 </div>

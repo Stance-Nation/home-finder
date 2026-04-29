@@ -147,6 +147,12 @@ def main():
         db.save(listing)
 
     all_db_listings = db.get_all()
+    # Remove stale DB listings that exceed the current transit hard cap
+    hard_limit = config.get("commute_hard_limit_minutes", 85)
+    all_db_listings = [
+        l for l in all_db_listings
+        if l.transit_minutes is None or l.transit_minutes <= hard_limit
+    ]
     new_ids = {l.listing_id for l in new_listings}
 
     from outputs.cli import format_report, save_report

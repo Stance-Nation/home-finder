@@ -84,6 +84,11 @@ def send_email(new_listings: list, all_count: int, dashboard_url: str, config: d
         return
     sender = config["sender_email"]
     password = os.environ.get("GMAIL_APP_PASSWORD", "")
+    if not password:
+        raise ValueError(
+            "GMAIL_APP_PASSWORD environment variable is not set. "
+            "Generate a Gmail App Password at myaccount.google.com → Security → App passwords."
+        )
     today = date.today().strftime("%B %d, %Y")
     subject = f"🏠 {len(new_listings)} New Listing{'s' if len(new_listings)!=1 else ''} Match Your Search — {today}"
     html_body = build_email_html(new_listings, all_count, dashboard_url)

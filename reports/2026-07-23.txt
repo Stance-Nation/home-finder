@@ -1,0 +1,34 @@
+
+HOME FINDER — Queens & Bronx
+==================================================
+Report date: July 23, 2026 | Total matches: 4 | New today: 4
+==================================================
+
+[★★★☆☆ (0.54)] 123-35 82nd Rd Unit 3N, Queens, NY
+  Type: Multi-Family
+  2 bed · $285,000 · Garage ✓ · Transit: 50min
+  Source: realtor  ⚠ Garage unconfirmed — verify before viewing
+  https://www.realtor.com/realestateandhomes-detail/9575205085
+  🚇 Transit map: https://www.google.com/maps/dir/?api=1&origin=123-35%2082nd%20Rd%20Unit%203N%2C%20Queens%2C%20NY&destination=200+5th+Ave%2C+New+York%2C+NY+10010&travelmode=transit
+
+[★★☆☆☆ (0.38)] 2042 Colonial Ave, Bronx, NY
+  Type: Detached
+  3 bed · $679,000 · Garage ✓ · Transit: 58min
+  Source: realtor  ⚠ Garage unconfirmed — verify before viewing
+  https://www.realtor.com/realestateandhomes-detail/3237963256
+  🚇 Transit map: https://www.google.com/maps/dir/?api=1&origin=2042%20Colonial%20Ave%2C%20Bronx%2C%20NY&destination=200+5th+Ave%2C+New+York%2C+NY+10010&travelmode=transit
+
+[★★☆☆☆ (0.36)] 2358 Tiemann Ave, Bronx, NY
+  Type: Detached
+  3 bed · $699,999 · Garage ✓ · Transit: 79min
+  Source: realtor  ⚠ Long Commute | ⚠ Garage unconfirmed — verify before viewing
+  https://www.realtor.com/realestateandhomes-detail/4993607296
+  🚇 Transit map: https://www.google.com/maps/dir/?api=1&origin=2358%20Tiemann%20Ave%2C%20Bronx%2C%20NY&destination=200+5th+Ave%2C+New+York%2C+NY+10010&travelmode=transit
+
+[★☆☆☆☆ (0.25)] 133-05 107th Ave, Queens, NY
+  Type: Detached
+  3 bed · $799,999 · Garage ✓ · Transit: 64min
+  Source: realtor  ⚠ Garage unconfirmed — verify before viewing
+  https://www.realtor.com/realestateandhomes-detail/3005228487
+  🚇 Transit map: https://www.google.com/maps/dir/?api=1&origin=133-05%20107th%20Ave%2C%20Queens%2C%20NY&destination=200+5th+Ave%2C+New+York%2C+NY+10010&travelmode=transit
+──────────────────────────────────────────────────
